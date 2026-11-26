@@ -1,10 +1,6 @@
 "use client";
 import { useState } from "react";
-const format = (n) =>
-  new Intl.NumberFormat("pt-PT", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(n / 100) + " MT";
+import { money } from "@/shared/money";
 export default function Quantity({ price, delivery, max }) {
   const [qty, set] = useState(1);
   return (
@@ -22,9 +18,9 @@ export default function Quantity({ price, delivery, max }) {
         </select>
       </label>
       <div className="summary">
-        <span>Entrega {format(delivery)}</span>
+        <span>Entrega {money(delivery)}</span>
         <strong aria-live="polite">
-          Total {format(price * qty + delivery)}
+          Total {money(price * qty + delivery)}
         </strong>
       </div>
     </>

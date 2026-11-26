@@ -1,4 +1,4 @@
-import "./style.css";
+import "@/frontend/styles/global.css";
 export const metadata = {
   title: "Encomendas",
   robots: { index: false, follow: false },

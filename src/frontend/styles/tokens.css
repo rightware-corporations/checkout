@@ -1,0 +1,18 @@
+@font-face{font-family:Manrope;src:url('/brand/fontes/Manrope.ttf') format('truetype');font-weight:200 800;font-display:swap;}
+:root{
+  --ox-navigation: #10263E;
+  --ox-action: #2155D6;
+  --ox-onDarkAccent: #77A7FF;
+  --ox-surface: #FFFFFF;
+  --ox-canvas: #F3F6FA;
+  --ox-text: #142A40;
+  --ox-secondaryText: #506279;
+  --ox-border: #CFD9E6;
+  --ox-successText: #155538;
+  --ox-successSurface: #DFF3E8;
+  --ox-pendingText: #754400;
+  --ox-pendingSurface: #FFF0C9;
+  --ox-errorText: #922D38;
+  --ox-errorSurface: #FCE8EB;
+  --ox-font: Manrope, system-ui, sans-serif;
+}

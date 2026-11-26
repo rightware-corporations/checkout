@@ -1,3 +1,4 @@
+import "server-only";
 import { DatabaseSync } from "node:sqlite";
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
@@ -76,9 +77,4 @@ export async function closeSession() {
       .run(digest(token).toString("hex"));
   jar.delete("seller");
 }
-export const money = (cents) =>
-  new Intl.NumberFormat("pt-PT", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(cents / 100) + " MT";
 export const reference = () => "ENC-" + randomUUID();

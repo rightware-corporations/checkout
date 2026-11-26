@@ -1,6 +1,7 @@
-import { db, seller, money } from "../../lib/store";
-import { login, logout, publish, changeState } from "../actions";
-import Copy from "./copy";
+import { db, seller } from "@/backend/store";
+import { money } from "@/shared/money";
+import { login, logout, publish, changeState } from "@/backend/actions";
+import Copy from "@/frontend/components/copy-link";
 export const dynamic = "force-dynamic";
 export default async function Page({ searchParams }) {
   const { erro } = await searchParams;

@@ -1,4 +1,5 @@
-import { db, money } from "../../lib/store";
+import { db } from "@/backend/store";
+import { money } from "@/shared/money";
 import { notFound } from "next/navigation";
 export default async function Page({ searchParams }) {
   const { ref } = await searchParams;
