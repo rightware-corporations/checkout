@@ -1,13 +1,14 @@
-export const metadata = { title: 'ORDERX — Gestão de encomendas | RIGHTWARE' };
+import OrderDemo from "@/frontend/components/order-demo";
+import "./vitrine.css";
+export const metadata={title:"ORDERX — Gestão de encomendas | RIGHTWARE"};
 
-export default function Home() {
-  return <main className="site">
-    <header className="sitebar"><a href="/" aria-label="ORDERX"><img src="/brand/positivo.svg" alt="ORDERX" /></a><nav><a href="#percurso">Como funciona</a><a className="pill" href="/gestao">Entrar na loja ↗</a></nav></header>
-    <div className="hero">
-      <div className="heroCopy"><p className="eyebrow">GESTÃO DE VENDAS · MOÇAMBIQUE</p><h1>Partilha o link.<br/><em>Recebe a encomenda.</em></h1><p className="intro">Publica os teus produtos, envia o checkout pelo WhatsApp e acompanha cada pedido até à entrega.</p><div className="ctas"><a className="pill" href="/gestao">Aceder ao painel ↗</a><a href="#percurso">Ver como funciona ↓</a></div></div>
-      <aside className="visual" aria-label="Exemplo de encomenda"><div className="paper"><div className="receiptHead"><img src="/brand/simbolo.svg" alt=""/><b>Amora Cosméticos</b></div><p className="eyebrow">EXEMPLO DE ENCOMENDA</p><h2>Creme de<br/>hidratação</h2><div className="receiptRow"><span>2 unidades</span><b>1.998,00 MT</b></div><div className="receiptRow"><span>Entrega</span><b>100,00 MT</b></div><div className="receiptTotal"><span>Total</span><b>2.098,00 MT</b></div><div className="receiptFoot">● &nbsp; Encomenda recebida</div></div></aside>
-    </div>
-    <div className="process" id="percurso"><h2>Como funciona</h2><div className="steps">{[['Publica o produto','Define o preço em meticais, as quantidades e a entrega.'],['Partilha o checkout','O comprador abre o link no telefone e envia os dados da encomenda.'],['Prepara a entrega','Consulta o pedido no painel e actualiza o estado até à entrega.']].map(([h,p],i)=><article key={h}><small>0{i+1}</small><h3>{h}</h3><p>{p}</p></article>)}</div></div>
-    <footer><b>ORDERX</b><span>Um produto RIGHTWARE</span></footer>
+export default function Home(){
+  return <main className="site vitrine">
+    <header className="sitebar"><a href="/" aria-label="ORDERX"><img src="/brand/positivo.svg" alt="ORDERX"/></a><nav><a href="#operacao">Operação da loja</a><a className="pill" href="/gestao">Entrar na loja ↗</a></nav></header>
+    <div className="cover"><div className="coverText"><p className="eyebrow">ORDERX / GESTÃO DE ENCOMENDAS</p><h1>Da conversa<br/>à entrega.</h1><p>Transforma o interesse de quem te escreve no WhatsApp numa encomenda com produto, contacto e morada. Acompanha o pedido até chegar ao cliente.</p><a className="pill" href="#percurso">Experimentar o checkout ↓</a></div><OrderDemo/></div>
+    <section className="operations" id="operacao"><div><p className="eyebrow">DENTRO DA LOJA</p><h2>O que precisa<br/>da tua atenção?</h2><p>No painel, cada encomenda reúne os dados de entrega e o estado do pedido. Abre a ficha para preparar o envio ou contactar o comprador.</p><a href="/gestao/encomendas">Consultar as minhas encomendas →</a></div>
+    <div className="sample"><small>Exemplo de operação · Amora</small><h3>Fila de encomendas</h3>{[["ENC-1003","Matola","Recebida"],["ENC-1002","Maputo","Em processamento"],["ENC-1001","Boane","Entregue"]].map(([ref,city,state],i)=><div className="sampleRow" key={ref}><b>{ref}</b><span>{city}</span><strong className={"state s"+i}>{state}</strong></div>)}</div></section>
+    <section className="questions"><h2>Antes da primeira venda</h2>{[["Como partilho um produto?","No painel, publica o checkout e copia o link para a conversa com o comprador."],["O comprador precisa de uma conta?","Pode encomendar directamente pelo link e recebe uma referência depois de enviar os dados de entrega."],["O envio da encomenda cobra o valor?","A ORDERX regista o pedido e o valor em meticais. O pagamento é combinado com a loja."]].map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</section>
+    <footer><img width="110" src="/brand/positivo.svg" alt="ORDERX"/><span>Um produto RIGHTWARE</span></footer>
   </main>;
 }
