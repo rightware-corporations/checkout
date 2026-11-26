@@ -1,5 +1,7 @@
 const lojas = { amora: 'Amora Cosméticos', nala: 'Casa Nala' };
-const pedidos = { amora: [{ ref:'ENC-1001', nome:'Sara M.', telefone:'••• 481', total:1099, estado:'Por confirmar' }], nala:[] };
+const pedidos = { amora: [{ ref:'ENC-1001', nome:'Sara M.', telefone:'••• 481', total:1099, estado:'Por confirmar',produto:'Creme de hidratação',qtd:1 },
+ {ref:'AM-204',nome:'Lídia C.',telefone:'••• 263',total:2098,estado:'Confirmada',produto:'Creme de hidratação',qtd:2},
+ {ref:'AM-203',nome:'Marta S.',telefone:'••• 712',total:1099,estado:'Entregue',produto:'Creme de hidratação',qtd:1}], nala:[] };
 const modulos = {resumo:'Resumo', encomendas:'Encomendas', produtos:'Produtos', checkouts:'Meus checkouts', clientes:'Clientes', tarefas:'Tarefas', entregas:'Entregas', cobrancas:'Cobranças', equipa:'Equipa', relatorios:'Relatórios', definicoes:'Definições', actividade:'Actividade'};
 const mt = n => n.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+,)/g,'.')+' MT';
 const seguro = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

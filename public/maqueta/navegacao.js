@@ -19,7 +19,7 @@ function render() {
  compra.q.onchange=()=>{compra.querySelector('output').textContent=mt(totalCompra(oferta,Number(compra.q.value)));};
  compra.onsubmit=e=>{
  e.preventDefault();
- const pedido={ref:nala?'NALA-'+crypto.randomUUID():'ENC-'+(1001+pedidos.amora.length),produto:oferta.nome,qtd:Number(compra.q.value),nome:compra.nome.value,telefone:'••• '+compra.tel.value.slice(-3),total:totalCompra(oferta,Number(compra.q.value)),estado:'Por confirmar'};
+ const pedido={ref:nala?'NALA-'+crypto.randomUUID():'ENC-'+(1001+pedidos.amora.filter(p=>p.ref.startsWith('ENC-')).length),produto:oferta.nome,qtd:Number(compra.q.value),nome:compra.nome.value,telefone:'••• '+compra.tel.value.slice(-3),total:totalCompra(oferta,Number(compra.q.value)),estado:'Por confirmar'};
  pedidos[lojaCompra].push(pedido);
  if(nala) guardarPedidoNala(pedido);
  location.hash=(nala?'/casa-nala/'+id+'/':'/comprador/')+pedido.ref;
