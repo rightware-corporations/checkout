@@ -41,4 +41,4 @@ Abrir `/maqueta/index.html` no servidor ou abrir `public/maqueta/index.html` dir
 | `public/maqueta/layout/` | Composição web para computador, tablet e telefone. |
 | `public/maqueta/dados.js` e `navegacao.js` | Dados fictícios e navegação da demonstração. |
 
-A web responsiva cobre os três tamanhos de ecrã. Uma app nativa instalável é uma decisão de produto em aberto. O backend operacional mantém o modelo de vendedor único. O comportamento multi-loja e os perfis nesta maqueta são simulados em memória e reiniciam ao recarregar.
+A web responsiva cobre os três tamanhos de ecrã. Uma app nativa instalável é uma decisão de produto em aberto. O backend operacional mantém o modelo de vendedor único. Os perfis e a operação multi-loja são simulados. A Casa Nala guarda produtos, checkouts publicados e pedidos fictícios no armazenamento local do navegador quando disponível. A Amora usa dados de sessão em memória.
