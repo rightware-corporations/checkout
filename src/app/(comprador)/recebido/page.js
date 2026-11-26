@@ -1,4 +1,4 @@
-import { db } from "@/backend/store";
+import { db } from "@/backend/persistence/sqlite";
 import { money } from "@/shared/money";
 import { notFound } from "next/navigation";
 export default async function Page({ searchParams }) {

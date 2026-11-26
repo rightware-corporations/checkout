@@ -27,3 +27,18 @@ O vendedor publica um produto e copia o link. O comprador abre o link, escolhe a
 | `tests/` | Teste de navegador do fluxo de encomenda. |
 
 Executar os comandos npm na raiz. A base local continua em `data/checkout.sqlite` por omissão. Importações internas podem usar `@/` para a raiz de `src/`.
+
+### Aplicações, canais e maqueta
+
+Abrir `/maqueta/index.html` no servidor ou abrir `public/maqueta/index.html` directamente no navegador. A pasta contém uma aplicação de demonstração independente que reutiliza a marca de `public/brand/`. O índice dá acesso à compra, à operação de duas lojas e à administração da plataforma.
+
+| Local | Organização |
+|---|---|
+| `src/app/(comprador)/` e `src/app/(loja)/` | Rotas do checkout operacional e da gestão do vendedor. |
+| `src/backend/identity/`, `checkouts/`, `orders/` | Sessão e acções organizadas por responsabilidade comercial. |
+| `src/backend/persistence/` e `forms/` | Ligação SQLite e leitura comum dos formulários. |
+| `public/maqueta/experiencias/` | Entrada, comprador, operação da loja e plataforma. |
+| `public/maqueta/layout/` | Composição web para computador, tablet e telefone. |
+| `public/maqueta/dados.js` e `navegacao.js` | Dados fictícios e navegação da demonstração. |
+
+A web responsiva cobre os três tamanhos de ecrã. Uma app nativa instalável é uma decisão de produto em aberto. O backend operacional mantém o modelo de vendedor único. O comportamento multi-loja e os perfis nesta maqueta são simulados em memória e reiniciam ao recarregar.

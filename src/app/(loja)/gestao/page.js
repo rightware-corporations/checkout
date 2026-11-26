@@ -1,6 +1,9 @@
-import { db, seller } from "@/backend/store";
+import { db } from "@/backend/persistence/sqlite";
+import { seller } from "@/backend/identity/session";
 import { money } from "@/shared/money";
-import { login, logout, publish, changeState } from "@/backend/actions";
+import { login, logout } from "@/backend/identity/actions";
+import { publish } from "@/backend/checkouts/actions";
+import { changeState } from "@/backend/orders/actions";
 import Copy from "@/frontend/components/copy-link";
 export const dynamic = "force-dynamic";
 export default async function Page({ searchParams }) {

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { randomUUID } from "node:crypto";
-import { db } from "@/backend/store";
+import { db } from "@/backend/persistence/sqlite";
 import { money } from "@/shared/money";
-import { order } from "@/backend/actions";
+import { order } from "@/backend/orders/actions";
 import Quantity from "@/frontend/components/quantity";
 export const dynamic = "force-dynamic";
 export default async function Page({ params, searchParams }) {
