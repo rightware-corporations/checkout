@@ -1,8 +1,9 @@
 import { requireSeller } from "@/backend/identity/require-seller";
+import CheckoutEditor from "@/frontend/components/checkout-editor";
 import { Frame } from "@/frontend/components/store-frame";
 export const dynamic="force-dynamic";
 import { publish } from "@/backend/checkouts/actions";
-export default async function Page({searchParams}) {await requireSeller();const {erro}=await searchParams;return <Frame active="Publicar produto"><p className="eyebrow">CATÁLOGO</p><h1>Publicar produto</h1><section>          <form action={publish}>
+export default async function Page({searchParams}) {await requireSeller();const {erro}=await searchParams;return <Frame active="Publicar produto"><p className="eyebrow">CATÁLOGO</p><h1>Publicar produto</h1><section>          <CheckoutEditor action={publish}>
             <label>
               Nome do produto
               <input name="title" maxLength="100" required />
@@ -40,6 +41,6 @@ export default async function Page({searchParams}) {await requireSeller();const 
               bairro opcional
             </label>
             {erro && <p role="alert">Verifique os dados do produto.</p>}
-            <button>Publicar link</button>
-          </form>
+            
+          </CheckoutEditor>
 </section></Frame>;}
