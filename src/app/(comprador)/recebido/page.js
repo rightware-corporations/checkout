@@ -8,7 +8,7 @@ export default async function Page({ searchParams }) {
     db().prepare("SELECT total FROM orders WHERE ref=?").get(ref);
   if (!o) notFound();
   return (
-    <main className="narrow">
+    <main className="narrow"><a className="brand" href="/"><img src="/brand/positivo.svg" alt="ORDERX"/></a><p className="eyebrow">CHECKOUT · ENCOMENDAS</p>
       <h1>Encomenda recebida</h1>
       <p>
         Total encomendado <strong>{money(o.total)}</strong>

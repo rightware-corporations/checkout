@@ -1,18 +1,12 @@
-import { db } from "@/backend/persistence/sqlite";
 import { seller } from "@/backend/identity/session";
+import { login } from "@/backend/identity/actions";
+import { db } from "@/backend/persistence/sqlite";
 import { money } from "@/shared/money";
-import { login, logout } from "@/backend/identity/actions";
-import { publish } from "@/backend/checkouts/actions";
-import { changeState } from "@/backend/orders/actions";
-import Copy from "@/frontend/components/copy-link";
-export const dynamic = "force-dynamic";
-export default async function Page({ searchParams }) {
-  const { erro } = await searchParams;
-  if (!(await seller()))
-    return (
-      <main className="narrow">
-        <h1>Painel do vendedor</h1>
-        <form action={login}>
+import { Frame } from "@/frontend/components/store-frame";
+export const dynamic="force-dynamic";
+export default async function Page({searchParams}) {
+ const {erro}=await searchParams;
+ if (!(await seller())) return <main className="access"><aside><a href="/"><img src="/brand/negativo.svg" alt="ORDERX"/></a><div><p className="eyebrow">ÁREA DA LOJA</p><h1>A tua operação<br/>de vendas.</h1><p>Produtos, links e encomendas num só lugar.</p></div></aside><section><p className="eyebrow">ACESSO DO VENDEDOR</p><h2>Entrar na loja</h2>        <form action={login}>
           <label>
             Palavra-passe
             <input
@@ -25,117 +19,8 @@ export default async function Page({ searchParams }) {
           {erro && <p role="alert">Verifique a palavra-passe.</p>}
           <button>Entrar</button>
         </form>
-      </main>
-    );
-  const links = db().prepare("SELECT * FROM links ORDER BY rowid DESC").all();
-  const orders = db()
-    .prepare(
-      "SELECT o.*,l.title FROM orders o JOIN links l USING(slug) ORDER BY o.rowid DESC",
-    )
-    .all();
-  return (
-    <main>
-      <header>
-        <h1>Gestão de encomendas</h1>
-        <form action={logout}>
-          <button className="secondary">Sair</button>
-        </form>
-      </header>
-      <div className="grid">
-        <section>
-          <h2>Publicar produto</h2>
-          <form action={publish}>
-            <label>
-              Nome do produto
-              <input name="title" maxLength="100" required />
-            </label>
-            <label>
-              Fotografia (URL HTTPS, opcional)
-              <input name="image" type="url" />
-            </label>
-            <label>
-              Preço por unidade (MT)
-              <input name="price" inputMode="decimal" required />
-            </label>
-            <label>
-              Entrega fixa (MT)
-              <input
-                name="delivery"
-                defaultValue="0"
-                inputMode="decimal"
-                required
-              />
-            </label>
-            <label>
-              Quantidade máxima
-              <input
-                name="max"
-                type="number"
-                min="1"
-                max="99"
-                defaultValue="2"
-                required
-              />
-            </label>
-            <label className="check">
-              <input name="bairro" type="checkbox" defaultChecked /> Incluir
-              bairro opcional
-            </label>
-            {erro && <p role="alert">Verifique os dados do produto.</p>}
-            <button>Publicar link</button>
-          </form>
-        </section>
-        <section>
-          <h2>Meus checkouts</h2>
-          {links.length === 0 && <p>Os links publicados aparecem aqui.</p>}
-          {links.map((l) => (
-            <article key={l.slug}>
-              <strong>{l.title}</strong>
-              <p>{money(l.price)}</p>
-              <a href={"/c/" + l.slug}>Abrir checkout</a>{" "}
-              <Copy path={"/c/" + l.slug} />
-            </article>
-          ))}
-        </section>
-      </div>
-      <section>
-        <h2>Encomendas</h2>
-        {!orders.length && <p>Ainda não recebeste encomendas.</p>}
-        {orders.map((o) => (
-          <article key={o.ref}>
-            <strong>
-              {o.name} · {money(o.total)}
-            </strong>
-            <p>
-              {o.title} × {o.qty} · Entrega {money(o.delivery)}
-            </p>
-            <p>
-              {o.phone} ·{" "}
-              {[o.address, o.bairro, o.city, o.province]
-                .filter(Boolean)
-                .join(", ")}
-            </p>
-            <small>{o.ref}</small>
-            <form action={changeState} className="inline">
-              <input type="hidden" name="ref" value={o.ref} />
-              <label>
-                Estado
-                <select aria-label="Estado" name="state" defaultValue={o.state}>
-                  {[
-                    "Recebida",
-                    "Em processamento",
-                    "Entregue",
-                    "Cancelada",
-                  ].map((v) => (
-                    <option key={v}>{v}</option>
-                  ))}
-                </select>
-              </label>
-              <button>Guardar estado</button>
-            </form>
-          </article>
-        ))}
-      </section>
-    </main>
-  );
+</section></main>;
+ const stats=db().prepare("SELECT COUNT(*) AS total, COUNT(CASE WHEN state='Recebida' THEN 1 END) AS novas, COALESCE(SUM(CASE WHEN state!='Cancelada' THEN total ELSE 0 END),0) AS valor FROM orders").get();
+ const recentes=db().prepare("SELECT o.ref,o.name,o.state,o.total,l.title FROM orders o JOIN links l USING(slug) ORDER BY o.rowid DESC LIMIT 6").all();
+ return <Frame active="Resumo"><p className="eyebrow">OPERAÇÃO DA LOJA</p><h1>Resumo de vendas</h1><div className="stats">{[["Encomendas",stats.total],["Por processar",stats.novas],["Valor encomendado",money(stats.valor)]].map(([k,v])=><div key={k}><small>{k}</small><strong>{v}</strong></div>)}</div><section><h2>Encomendas recentes</h2>{recentes.map(o=><article key={o.ref}><strong>{o.name} · {o.title}</strong><p>{money(o.total)} · {o.state}</p></article>)}{!recentes.length&&<p>Publica o primeiro checkout para começares a receber pedidos.</p>}<a href="/gestao/encomendas">Abrir encomendas →</a></section><a className="pill" href="/gestao/publicar">Publicar produto ↗</a></Frame>;
 }

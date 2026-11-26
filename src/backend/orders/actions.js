@@ -60,5 +60,5 @@ export async function changeState(form) {
     db()
       .prepare("UPDATE orders SET state=? WHERE ref=?")
       .run(state, field(form, "ref"));
-  redirect("/gestao");
+  redirect("/gestao/encomendas");
 }

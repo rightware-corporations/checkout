@@ -11,7 +11,7 @@ export default async function Page({ params, searchParams }) {
   const l = db().prepare("SELECT * FROM links WHERE slug=?").get(slug);
   if (!l) notFound();
   return (
-    <main className="narrow">
+    <main className="narrow"><a className="brand" href="/"><img src="/brand/positivo.svg" alt="ORDERX"/></a><p className="eyebrow">CHECKOUT · ENCOMENDAS</p>
       {l.image && <img src={l.image} alt={l.title} />}
       <h1>{l.title}</h1>
       <p className="price">{money(l.price)} por unidade</p>

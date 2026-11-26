@@ -28,10 +28,10 @@ export async function publish(form) {
         !URL.canParse(image) ||
         new URL(image).protocol !== "https:"))
   )
-    redirect("/gestao?erro=produto");
+    redirect("/gestao/publicar?erro=produto");
   const slug = randomBytes(9).toString("hex");
   db()
     .prepare("INSERT INTO links VALUES (?,?,?,?,?,?,?)")
     .run(slug, title, price, delivery, max, image, form.has("bairro") ? 1 : 0);
-  redirect("/gestao");
+  redirect("/gestao/checkouts");
 }
