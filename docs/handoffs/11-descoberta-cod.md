@@ -21,3 +21,18 @@ Separar no modelo a ficha do artigo, a oferta publicada, o pedido, a entrega, o 
 
 ## Continuidade
 Preservar checkout e gestão de pedidos já testados. Rever o inventário anterior por decisão manter/adaptar/adiar. Prioridade proposta: oferta COD e checkout; depois pedidos, entregas, stock e conferência; subscrições e governação dependem da decisão comercial. O presente registo distingue observação de proposta e não autoriza alterações de código.
+## Actualização de direcção · 27/11/2026
+
+A indicação posterior da RIGHTWARE estabelece a UCODEfy como referência suficiente para o desenho. A questão 1 acima pertence à definição da oferta comercial; o frontend inclui desde já a experiência de planos. O prompt OX-ALIGN-001 continua a orientar o método. O plano e a matriz em docs/produto, entregues em 84d889a, são a baseline anterior à descoberta COD em d18fd6f.
+
+**Ordem vigente.**
+1. Desenho da operação COD (missão OX-COD-01). Reconciliar os IDs da matriz anterior com a referência; identificar stock, notificações, planos e suporte. Entregar mapa por papel e três percursos para a mesma oferta: entrega cobrada, tentativa falhada e cancelamento. Em cada passo identificar responsável, estado do pedido, movimento de unidades e valor por receber. Marcar hipóteses. Aceitação: cada transição tem origem, destino, efeito e ecrã identificados.
+2. Fundação visual da aplicação real. Shell privada, navegação e fonte central de dados fictícios relacionados. Aceitação: seguir a mesma referência no painel, na fila e na ficha sem divergência.
+3. Venda completa. Catálogo e oferta física → publicação → checkout público por província → confirmação → atendimento. Rever desktop, tablet e telefone.
+4. Operação após o pedido. Expedição, stock, recebimento, notificações e relatórios. Distinguir valor encomendado, entregue e recebido nos três desfechos.
+5. Conta e plataforma. Planos ilustrativos, equipa, definições, suporte e supervisão da plataforma. Rever permissões previstas por papel.
+6. Revisão visual integral; depois consolidar serviços, regras, autorização e integrações. Exigir decisão comercial sobre tarifas antes de cobrança efectiva e validar regras de baixa antes de automatizar stock.
+
+**Protocolo de continuidade.** Por indicação expressa da RIGHTWARE, cada resposta de trabalho sobre ORDERX deve deixar no GitHub uma entrada curta, mesmo quando a passagem só altera uma decisão. Registar missão, decisão ou resultado, evidência/commit de referência, validação executada ou NOT_RUN, pendências e próxima acção. Actualizar este handoff enquanto a missão estiver activa e ligar o seguinte quando mudar de pacote. Excluir credenciais e dados de clientes.
+
+**Saída desta passagem.** Comparado o prompt anterior com a descoberta do painel do produtor. Direcção e sequência actualizadas. Validação documental; testes da aplicação NOT_RUN porque não houve alteração executável. Próxima entrega: matriz COD reconciliada e mapa das três jornadas em OX-COD-01. O anterior denominador de 40 destinos não mede ainda o novo âmbito.
