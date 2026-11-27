@@ -52,3 +52,17 @@ HEAD de entrada 61f54a8a20b42356a1655bfcff2ebb9d102096d7. ZIP recuperado da bibl
 
 ## OX-COD-02.E-R1 · 27/11/2026
 Operador aprovou VIS-01–06. Baseline 9ebc1e2ea787b9904506e39a0f41d1365c2f92db. [R1](../design/revisao-visual-cod-02-e-r1.md). Fila antes da lista em todas as larguras, insights redistribuídos, tipografia revista, identidade sem repetir referência, métricas dossier adaptadas, selector em fluxo no mobile, grupos/navegação nomeados, indicador dev desactivado e contraste reforçado. Modelo/dados/backend/sessão/checkout/tokens intactos. Node --test 5/5 PASS (Node 22, blobs confirmados); contraste RGB estático PASS. Browser reforçado; build/browser/novas capturas NOT_RUN (Node 22 e DNS indisponível). PASS técnico histórico 19e1155 mantido; não promover R1. Executar gate Node 24 novamente e obter aceite das nove capturas reais. 03 não iniciada.
+
+
+## OX-COD-02.E-R1 · Execução e comparação · 27/11/2026
+HEAD remoto e código executado: `f93cab2bde031a482fe46c216502ec864c442204`. Clone dedicado limpo, Node v24.22.3, Playwright/Chromium 158. Primeiro ensaio interrompido por lançador Chromium sem binário. Uma repetição no mesmo clone foi recusada pelo preflight porque Next dev gerou AGENTS.md. Nova clonagem do mesmo SHA com Chromium operacional: `python tests/run_cod02_gate.py` terminou com TECHNICAL_PASS_VISUAL_REVIEW_PENDING. Instalação, 5/5 unitários, build, duas suites da aplicação e duas da maqueta passaram. Produção: revisão privada 404 para convidado e vendedor.
+
+Comparação realizada após o gate: nove pares de PNG da execução anterior (19e1155) e desta revisão, nas larguras 390, 820 e 1440. CRC, hashes do manifesto e descodificação das imagens conferidos nos dois ZIP.
+- VIS-01: fila única antes da lista no DOM e no ecrã; a 820 os painéis inferiores passam a duas colunas e o último ocupa a linha inteira. B04 desktop filtrada passa de 2089 a 1593 px de altura.
+- VIS-02: referências e montantes a 14 px, estados e legendas a 12 px; canal e local agrupados no telefone. Teste dos tamanhos computados de referência, legenda e estado passou nas três larguras.
+- VIS-03: ENC-1001 aparece uma vez na ficha, produto e comprador no cartão. Total acima de duas métricas no telefone; três lado a lado no tablet. O total de 2.098,00 MT manteve-se na navegação.
+- VIS-04: B04 abre em fluxo no telefone; a altura passa de 2957 a 3229 px e o painel deixa de cobrir o hero. Teclado, fecho, reabertura, mudança para Casa Nala e ausência de overflow horizontal verificados nas três larguras.
+- VIS-05: indicador circular de desenvolvimento ausente nas nove novas capturas reais.
+- VIS-06: nas três larguras, contraste do contorno computado do campo sobre o fundo 3,88:1; rótulo computado do hero contra o extremo claro de referência 5,86:1. Estes resultados cobrem os pares avaliados.
+
+ZIP nativo ORDERX-COD-02-E-R1.zip com nove PNG, logs, manifesto e r1-checks.json; SHA-256 `09bc1efe7883b6948b1cf9bd8885bc1ee2aafa0c4eec2b767f9f6f7937a0b19e`. Recomendação: submeter R1 à aceitação visual da RIGHTWARE. Esta execução alterou apenas o handoff. OX-COD-03 aguarda aceitação.
