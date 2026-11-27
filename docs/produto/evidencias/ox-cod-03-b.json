@@ -1,0 +1,32 @@
+{
+  "mission": "OX-COD-03.B",
+  "date": "2026-11-27",
+  "baseline": "c761f0e8919edcd27a89cdfeaf67c85e3ea14414",
+  "environment": {
+    "node": "v22.16.0",
+    "sqlite": "node:sqlite experimental",
+    "gitRemote": "DNS blocked"
+  },
+  "blobs": {
+    "src/backend/catalog/repository.mjs": "ba9e098b860fd7f55de47c4d55e342cbbc536f74",
+    "tests/catalog.test.mjs": "4b1e17ac2a5b32163ad724731c638c23af2c8b85",
+    "tests/catalog_migration_file.test.mjs": "2d45344dcaca37e6e238a3ae1028757428ddae40"
+  },
+  "command": "node --test tests/*.test.mjs in isolated directory containing exact 3 files",
+  "unit": {
+    "status": "PASS",
+    "tests": 6,
+    "fail": 0,
+    "skip": 0
+  },
+  "backupRestore": {
+    "status": "PASS",
+    "scope": "closed disposable SQLite with reduced fictitious legacy schema"
+  },
+  "build": "NOT_RUN",
+  "browser": "NOT_RUN",
+  "foundationRegression": "NOT_RUN",
+  "actualScreenshots": 0,
+  "visualAcceptance": "PENDING",
+  "state": "IMPLEMENTED_CANDIDATE_PARTIAL_VALIDATION"
+}

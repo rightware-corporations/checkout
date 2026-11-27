@@ -25,6 +25,6 @@ export function CatalogForm({action,product=null}) {
 export function ProductStateForm({action,product}) {
  const [state,submit,pending]=useActionState(action,initial);
  const archive=product.state==="active";
- if(archive&&product.offers.length)return <p className="ox-catalog-note">Arquivo indisponível: este produto tem checkouts associados. Nenhum link será desactivado automaticamente.</p>;
+ if(archive&&product.offerCount)return <p className="ox-catalog-note">Arquivo indisponível: este produto tem checkouts associados. Nenhum link será desactivado automaticamente.</p>;
  return <details className="ox-catalog-confirm"><summary>{archive?"Arquivar produto":"Reactivar produto"}</summary><form action={submit}><input type="hidden" name="revision" value={product.revision}/><input type="hidden" name="state" value={archive?"archived":"active"}/><p>{archive?"O produto ficará no histórico. Não será apagado.":"O produto voltará ao catálogo activo."}</p><button disabled={pending}>{pending?"A guardar…":archive?"Confirmar arquivo":"Confirmar reactivação"}</button>{state.message&&<p role="alert" className="ox-catalog-error">{state.message}</p>}</form></details>;
 }
