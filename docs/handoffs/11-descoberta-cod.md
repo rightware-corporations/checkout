@@ -40,3 +40,11 @@ A indicação posterior da RIGHTWARE estabelece a UCODEfy como referência sufic
 ## Passagem ao agente GPT · 27/11/2026
 
 Prompt de execução publicado em [docs/produto/prompt-mestre-execucao-cod.md](../produto/prompt-mestre-execucao-cod.md), commit 6d7596d. O agente GPT assume a continuidade e o Work será também utilizado em missões complexas de arquitectura, integração, migração e validação transversal. OX-COD-01 é a primeira missão executável; a entrega deste prompt não conclui essa missão. Ler estado e HEAD antes de escrever. Validada a publicação documental. Testes da aplicação NOT_RUN nesta passagem exclusivamente documental. Próxima evidência: matriz reconciliada, três jornadas COD calculadas e handoff actualizado.
+
+## Execução OX-COD-01 · 27/11/2026
+
+**Concluída no âmbito documental e de cálculo de fixture.** Baseline `e167126e2e54dd4aff20e5a02436ae987ff1a67a` confirmada; sem sucessor inicial. Lidos prompt, matriz, ordem, arquitectura, planta Stitch, DESIGN, README, SQLite, acções de encomendas/publicação, money e teste browser. AGENTS.md ausente na árvore; estado local de outros agentes não inspeccionável via conector remoto. Sem alterações de código ou dados da aplicação.
+
+Entregáveis no mesmo commit: [matriz](../produto/cobertura.md) 40→48 IDs; [mapa, três jornadas e decisões](../produto/jornadas-cod.md); [evidência](../produto/evidencias/ox-cod-01.json). 199 asserções PASS em JavaScript, 21 transições, expectativas por passo, replay de IDs e baixa única. Build/browser/CI/persistência/aceite NOT_RUN; histórico preservado, sem promoção. Não prova RBAC, isolamento real nem concorrência.
+
+Hipóteses: stock inicial 10, reserva na submissão, baixa na entrega, libertação no cancelamento anterior à saída, conciliação pelo financeiro. Pendências: regras reais de stock e cobrança, retorno/reembolso, E.deliver, províncias/taxas, multi-loja/planos, integrações/permissões. Perfis não observados identificados na matriz. Próxima dependência **OX-COD-02**, agente GPT; [handoff activo sucessor](12-fundacao-visual-cod.md). Confirmar HEAD, não repetir 01 nem sobrepor trabalho de outro agente. Consultar histórico Git para commit desta entrega.
