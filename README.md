@@ -42,3 +42,6 @@ Abrir `/maqueta/index.html` no servidor ou abrir `public/maqueta/index.html` dir
 | `public/maqueta/dados.js` e `navegacao.js` | Dados fictícios e navegação da demonstração. |
 
 A web responsiva cobre os três tamanhos de ecrã. Uma app nativa instalável é uma decisão de produto em aberto. O backend operacional mantém o modelo de vendedor único. Os perfis e a operação multi-loja são simulados. A Casa Nala guarda produtos, checkouts publicados e pedidos fictícios no armazenamento local do navegador quando disponível. A Amora usa dados de sessão em memória.
+
+### Revisão privada OX-COD-02 (candidata)
+Em desenvolvimento local apenas, com sessão de vendedor e `ORDERX_REVIEW=1`, abrir `/gestao/revisao`. Dados fictícios de Amora/Casa Nala, sem operações de escrita. Não habilita papéis reais. Executar `node --test tests/review_foundation.test.mjs` e, com servidor dev e SQLite descartável, `python tests/review_foundation_browser.py`. Consulte `docs/design/fundacao-cod-02.md`.

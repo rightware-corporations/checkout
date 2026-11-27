@@ -1,0 +1,5 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { getContext,getReviewOrder } from "../src/backend/review/model.mjs";
+test("Same reference and total in summary and detail",()=>{const c=getContext("amora","gestora");assert.equal(c.orders[0].ref,"ENC-1001");assert.equal(c.metrics.ordered,209800);assert.deepEqual(c.orders[0],getReviewOrder("amora","gestora","ENC-1001"));assert.equal(c.orders[0].available,8);assert.equal(c.metrics.received,0);assert.equal(c.metrics.due,209800);});
+test("Empty store and scope",()=>{assert.equal(getContext("casa-nala","gestora").metrics.count,0);assert.equal(getReviewOrder("casa-nala","gestora","ENC-1001"),null);assert.equal(getContext("amora","estafeta").orders.length,0);assert.equal(getReviewOrder("amora","estafeta","ENC-1001"),null);assert.equal(getReviewOrder("amora","financeiro","ENC-1001"),null);assert.equal(getReviewOrder("amora","stock","ENC-1001"),null);assert.equal(getContext("amora","admin"),null);assert.equal(getContext("unknown","gestora"),null);assert.equal(getReviewOrder("amora","atendimento","ENC-1001").total,209800);});
