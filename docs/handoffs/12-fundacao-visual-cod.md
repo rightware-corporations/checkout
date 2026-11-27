@@ -46,3 +46,6 @@ HEAD remoto inicial confirmado em `e38c48589349e24183f270a0b90c8297ab4562b5`. Ex
 5. Verificação complementar B04 em Chromium, fora do ZIP, nas três larguras: foco por Tab em «Saltar para conteúdo», activação por Enter, filtro sem resultados, abertura do selector de contexto por teclado e ausência de overflow horizontal da página.
 
 Pendente: revisão visual das três vistas face a Commerce Command V02–V04, incluindo contraste e aceitação pela RIGHTWARE. OX-COD-03 aguarda essa decisão.
+
+## Revisão visual independente · 27/11/2026
+HEAD de entrada 61f54a8a20b42356a1655bfcff2ebb9d102096d7. ZIP recuperado da biblioteca; SHA-256 coincidente, CRC OK, 19/19 hashes do manifesto, 9/9 PNG inspeccionados. Logs confirmam 5 unitários, build e 4 suites PASS. Comparação desde 19e1155 confirma apenas handoff alterado. [Revisão visual e contraste](../design/revisao-visual-cod-02-e.md). Preservar TECHNICAL_PASS do commit executado; recomendação VISUAL_CHANGES_REQUESTED: fila de atenção antes da lista no mobile, equilíbrio desktop/tablet, tipografia de tabela, hierarquia da ficha, revisão contraste de controlos/hero e indicador dev nas capturas. Não houve reexecução nem alteração de aplicação. Aceitação formal RIGHTWARE pendente. Próxima dependência proposta 02.E-R1 (ajustes pontuais + gate + nove capturas + decisão); 03 não iniciada. Sem promoção de matriz.
