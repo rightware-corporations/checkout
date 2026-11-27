@@ -66,3 +66,6 @@ Comparação realizada após o gate: nove pares de PNG da execução anterior (1
 - VIS-06: nas três larguras, contraste do contorno computado do campo sobre o fundo 3,88:1; rótulo computado do hero contra o extremo claro de referência 5,86:1. Estes resultados cobrem os pares avaliados.
 
 ZIP nativo ORDERX-COD-02-E-R1.zip com nove PNG, logs, manifesto e r1-checks.json; SHA-256 `09bc1efe7883b6948b1cf9bd8885bc1ee2aafa0c4eec2b767f9f6f7937a0b19e`. Recomendação: submeter R1 à aceitação visual da RIGHTWARE. Esta execução alterou apenas o handoff. OX-COD-03 aguarda aceitação.
+
+## Parecer independente R1 · 27/11/2026
+HEAD de entrada 334cbce319ae600ca0540452351a48216f2c8802. Recuperados ambos ZIP, CRC OK, 19/19 + 20/20 hashes, nove pares de PNG comparados, logs e r1-checks.json inspeccionados. [Parecer de aceitação](../design/parecer-aceitacao-cod-02-e-r1.md). Os seis achados estão resolvidos no âmbito testado. Recomendação VISUAL_ACCEPTANCE_RECOMMENDED; não requer R2 pelos achados avaliados. Não é aprovação formal da RIGHTWARE, nem novo gate executado. Sem mudança de código ou promoção da matriz. OX-COD-03 permanece NOT_STARTED até decisão explícita do operador.
