@@ -33,3 +33,16 @@ Baseline bafdedccb0b983603dba6be2eb61b1c04ea443b1. Desta vez o runner Node nativ
 
 ## Verificação de progresso pelo Work · 27/11/2026
 Clone dedicado em 900bdaf. Dez commits desde e167126. Node v24.22.3, `node --test tests/*.mjs`: 5 PASS, 0 falhas, 0 skips. Nesta consulta de estado não se executou o gate completo. 02.E permanece aberto para build, percursos em Chromium, nove capturas e decisão visual da RIGHTWARE. Sem alteração de código de produto.
+
+
+## OX-COD-02.E · Resultado de execução · 27/11/2026
+
+HEAD remoto inicial confirmado em `e38c48589349e24183f270a0b90c8297ab4562b5`. Execução em clone dedicado, com árvore limpa antes de cada tentativa, SQLite temporária, Node 24.22.3, Python 3.12.14, Playwright 1.62.0 e Chromium 158.0.8127.0.
+
+1. A primeira execução falhou na revisão privada. O teste navegava antes da conclusão do login. O commit `e74b1d05ea2ad6c6b98497fbf43203b21d0a468d` espera pelo painel autenticado.
+2. Na segunda execução, C04a devolveu HTTP 500. O componente de identidade da encomenda recebia a propriedade reservada `ref`. O commit `19e115560479eaaa38f47e5f41f7c62b812d3bf8` usa `orderRef` na chamada e no componente.
+3. Na terceira execução, nesse último commit, `python tests/run_cod02_gate.py` produziu `TECHNICAL_PASS_VISUAL_REVIEW_PENDING`. Instalação, testes unitários, build e quatro suites de navegador terminaram com código 0. Em produção a rota de revisão respondeu 404 para convidado e vendedor autenticado.
+4. Capturas reais em `screens/` no ZIP para C01, B04 e C04a a 390, 820 e 1440 px. Verificados CRC do ZIP, hashes SHA-256 de cada artefacto no manifesto e descodificação dos nove PNG. ZIP entregue à RIGHTWARE: `ORDERX-COD-02-E.zip`, SHA-256 `8c3f46ca63f2dfe76c6ff3d6452028da48def37fb1ab302db415b51bd40b03a4`.
+5. Verificação complementar B04 em Chromium, fora do ZIP, nas três larguras: foco por Tab em «Saltar para conteúdo», activação por Enter, filtro sem resultados, abertura do selector de contexto por teclado e ausência de overflow horizontal da página.
+
+Pendente: revisão visual das três vistas face a Commerce Command V02–V04, incluindo contraste e aceitação pela RIGHTWARE. OX-COD-03 aguarda essa decisão.
