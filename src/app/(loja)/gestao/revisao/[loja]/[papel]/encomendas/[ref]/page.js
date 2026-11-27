@@ -1,9 +1,15 @@
 import { reviewOrder } from "@/backend/review/private-data";
+import { reviewFilters, reviewQuery } from "@/backend/review/model.mjs";
 import { Frame } from "@/frontend/components/store-frame";
-import { Status, Metrics, CommandHeader, Progress, SectionHeading } from "@/frontend/components/foundation-parts";
+import { Metrics, CommandHeader, SectionHeading } from "@/frontend/components/foundation-parts";
+import { OrderIdentity, AmountBreakdown, StateSummary, StockSnapshot } from "@/frontend/components/order-detail";
 import { money } from "@/shared/money";
 export const dynamic="force-dynamic";
-export default async function Page({params}){
- const {loja,papel,ref}=await params;const context=await reviewOrder(loja,papel,ref);const o=context.order;
- return <Frame active="Resumo" review={context}><a href={`/gestao/revisao/${loja}/${papel}`}>← Voltar ao resumo</a><CommandHeader eyebrow="FICHA DA ENCOMENDA" title={o.ref} description={o.product+" · "+o.customer} action={<Status value={o.order}/>}/><Metrics metrics={[["Total encomendado",money(o.total)],["Por receber",money(o.due)],["Recebido",money(o.received)]]}/><div className="ox-detail-grid"><section><h2>Composição do valor</h2><dl className="ox-ledger"><div><dt>{o.qty} × {money(o.price)}</dt><dd>{money(o.qty*o.price)}</dd></div><div><dt>Entrega</dt><dd>{money(o.fee)}</dd></div><div><dt>Total</dt><dd>{money(o.total)}</dd></div></dl></section><section><SectionHeading title="Percurso COD" description="Três estados independentes"/><Progress stages={[["Pedido",o.order,true],["Entrega",o.delivery,false],["Cobrança",o.payment,false]]}/></section><section><h2>Stock da fixture</h2><dl className="ox-ledger"><div><dt>Físico</dt><dd>{o.physical}</dd></div><div><dt>Reservado</dt><dd>{o.reserved}</dd></div><div><dt>Disponível</dt><dd>{o.available}</dd></div></dl><p>Hipóteses de desenho OX-COD-01.</p></section><section><h2>Responsável</h2><dl className="ox-ledger"><div><dt>Atendimento</dt><dd>{o.assignee}</dd></div><div><dt>Canal</dt><dd>{o.channel}</dd></div><div><dt>Local</dt><dd>{o.province}</dd></div><div><dt>Data</dt><dd>{o.date}</dd></div></dl><p>Ficha de leitura. Sem alteração de pedido, cobrança ou stock.</p></section></div></Frame>
+export default async function Page({params,searchParams}){
+ const {loja,papel,ref}=await params;const context=await reviewOrder(loja,papel,ref),o=context.order;
+ const back=`/gestao/revisao/${loja}/${papel}${reviewQuery(reviewFilters(await searchParams))}#pedidos`;
+ return <Frame active="Resumo" review={context}><a className="ox-back" href={back}>← Voltar às encomendas</a><CommandHeader eyebrow="FICHA DA ENCOMENDA" title={o.ref} description="Consulta a composição comercial, a entrega e a cobrança." action={<span className="ox-role">Leitura · revisão privada</span>}/>
+ <OrderIdentity ref={o.ref} product={o.product} customer={o.customer} date={o.date} channel={o.channel} location={o.province} status={o.order}/>
+ <Metrics metrics={[["Total encomendado",money(o.total),"Valor original"],["Por receber",money(o.due),"Ainda não conciliado"],["Recebido",money(o.received),"Confirmado pelo financeiro"]]}/>
+ <div className="ox-detail-grid"><AmountBreakdown qty={o.qty} price={o.price} fee={o.fee} total={o.total}/><StateSummary order={o.order} delivery={o.delivery} payment={o.payment}/><StockSnapshot physical={o.physical} reserved={o.reserved} available={o.available}/><section><SectionHeading title="Responsabilidade e cobrança" description="Cenário de leitura; sem alteração de operações"/><dl className="ox-ledger"><div><dt>Atendimento</dt><dd>{o.assignee}</dd></div><div><dt>Estafeta</dt><dd>{o.courier||"Não atribuído"}</dd></div><div><dt>Declarado por conciliar</dt><dd>{money(o.declared)}</dd></div><div><dt>Anulado</dt><dd>{money(o.voided)}</dd></div></dl></section></div></Frame>
 }

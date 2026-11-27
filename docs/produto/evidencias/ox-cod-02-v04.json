@@ -1,0 +1,51 @@
+{
+  "mission": "OX-COD-02",
+  "revision": "V04",
+  "baseline": "f14fb90adcaaf6ce33eb0859ff29a606a8455b27",
+  "date": "2026-11-27",
+  "assertions": 14,
+  "status": "PASS",
+  "method": "Candidate model executed in isolated JavaScript with ESM export keywords removed; explicit checks for totals, URL encoding, invalid filters, role priorities, empty store and inaccessible record.",
+  "metrics": {
+    "count": 6,
+    "ordered": 907800,
+    "delivered": 235000,
+    "due": 703800,
+    "received": 75000,
+    "voided": 129000,
+    "declared": 160000
+  },
+  "priorities": [
+    {
+      "key": "confirm",
+      "label": "Pedidos por confirmar",
+      "description": "Contactar o comprador e verificar o pedido.",
+      "count": 1,
+      "refs": [
+        "ENC-1001"
+      ]
+    },
+    {
+      "key": "retry",
+      "label": "Tentativas falhadas",
+      "description": "Rever a ocorrência e preparar nova tentativa.",
+      "count": 1,
+      "refs": [
+        "ENC-1003"
+      ]
+    },
+    {
+      "key": "settle",
+      "label": "Valores por conciliar",
+      "description": "Conferir o numerário declarado.",
+      "count": 1,
+      "refs": [
+        "ENC-1006"
+      ]
+    }
+  ],
+  "build": "NOT_RUN",
+  "nodeTest": "NOT_RUN",
+  "browser": "NOT_RUN",
+  "visualAcceptance": "PENDING"
+}

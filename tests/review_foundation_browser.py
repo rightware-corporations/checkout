@@ -1,8 +1,11 @@
 # Start dev server with ORDERX_REVIEW=1 and disposable CHECKOUT_DB before running.
 import os
+from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 base=os.environ.get("CHECKOUT_TEST_URL","http://127.0.0.1:3140")
 path="/gestao/revisao/amora/gestora"
+evidence=os.environ.get("ORDERX_EVIDENCE_DIR")
+if evidence: Path(evidence).mkdir(parents=True,exist_ok=True)
 with sync_playwright() as p:
     b=p.chromium.launch(executable_path=os.environ.get("CHROMIUM_PATH"),args=["--no-sandbox"])
     guest=b.new_page()
@@ -19,6 +22,8 @@ with sync_playwright() as p:
         seller.goto(base+path)
         expect(seller.get_by_role("link",name="ENC-1001",exact=True)).to_be_visible()
         assert "2098,00MT" in seller.locator("main").inner_text().replace(" ","").replace("\xa0","").replace("\u202f","")
+        assert seller.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        if evidence: seller.screenshot(path=str(Path(evidence)/f"C01-{w}.png"),full_page=True)
         seller.get_by_role("textbox",name="Pesquisar").fill("ENC-1001")
         seller.get_by_role("button",name="Filtrar",exact=True).click()
         expect(seller.get_by_role("link",name="ENC-1002",exact=True)).to_have_count(0)
@@ -26,6 +31,12 @@ with sync_playwright() as p:
         expect(seller.get_by_role("heading",name="ENC-1001",exact=True)).to_be_visible()
         assert "2098,00MT" in seller.locator("main").inner_text().replace(" ","").replace("\xa0","").replace("\u202f","")
         assert seller.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        if evidence: seller.screenshot(path=str(Path(evidence)/f"C04a-{w}.png"),full_page=True)
+        seller.get_by_role("link",name="Voltar às encomendas",exact=False).click()
+        expect(seller.get_by_role("textbox",name="Pesquisar")).to_have_value("ENC-1001")
+        expect(seller.get_by_role("link",name="ENC-1002",exact=True)).to_have_count(0)
+        seller.get_by_text("Alterar contexto",exact=True).click()
+        if evidence: seller.screenshot(path=str(Path(evidence)/f"B04-{w}.png"),full_page=True)
         seller.goto(base+"/gestao/revisao/casa-nala/gestora")
         expect(seller.get_by_text("Nada a tratar",exact=True)).to_be_visible()
         seller.goto(base+"/gestao/revisao/casa-nala/gestora/encomendas/ENC-1001")

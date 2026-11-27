@@ -40,3 +40,21 @@ export function getReviewOrder(storeId, roleId, ref) {
  return getContext(storeId,roleId)?.orders.find(o=>o.ref===ref)||null;
 }
 export const reviewStores=stores.map(({id,name})=>({id,name}));
+
+export function reviewFilters(params={}) {
+ return {query:typeof params.q==="string"?params.q.trim().slice(0,120):"",state:typeof params.estado==="string"&&reviewStates.includes(params.estado)?params.estado:""};
+}
+export function reviewQuery({query="",state=""}={}) {
+ const f=reviewFilters({q:query,estado:state});
+ const fields=[["q",f.query],["estado",f.state]].filter(([,v])=>v);
+ return fields.length?"?"+fields.map(([k,v])=>k+"="+encodeURIComponent(v)).join("&"):"";
+}
+export function reviewPriority(orders,role) {
+ const groups=[
+ {key:"confirm",label:"Pedidos por confirmar",description:"Contactar o comprador e verificar o pedido.",matches:o=>o.order==="Por confirmar"},
+ {key:"retry",label:"Tentativas falhadas",description:"Rever a ocorrência e preparar nova tentativa.",matches:o=>o.delivery==="Tentativa falhada"},
+ {key:"settle",label:"Valores por conciliar",description:"Conferir o numerário declarado.",matches:o=>o.payment==="Declarado / por conciliar"}
+ ];
+ const allowed=role==="gestora"?["confirm","retry","settle"]:role==="atendimento"?["confirm"]:role==="estafeta"?["retry"]:role==="financeiro"?["settle"]:[];
+ return groups.filter(g=>allowed.includes(g.key)).map(({matches,...g})=>{const records=orders.filter(matches);return {...g,count:records.length,refs:records.map(o=>o.ref)}});
+}
