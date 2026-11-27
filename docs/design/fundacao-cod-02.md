@@ -1,0 +1,22 @@
+# ORDERX · OX-COD-02 — Caderno de fundação visual
+27/11/2026 · Baseline cd27e9311c9e0aa71a9879175ac500ad4e118116. Direcção explícita do operador: pensar e desenhar wireframes, ecrãs, imagens e componentes antes de consolidar código. Kit enviado ORDERX_Kit_de_Marca_v01(1).zip inspeccionado; DESIGN.md, prancha, tokens, SVG e Manrope. Tokens correspondem ao repositório; manter geometria e activos originais. Aprovação visual específica pendente.
+
+## 02.A · Arquitectura de informação
+- C01: cabeçalho contexto/loja/papel → indicadores com unidade e origem → trabalho pendente → referência que abre ficha. Não misturar dinheiro recebido e valor encomendado.
+- B04: contexto operacional actual fixo, vendedor único. Na revisão, Amora (activa) e Casa Nala (vazia) seleccionadas explicitamente; perfis simulados, sem alteração de sessão.
+- C04.a: referência é título; voltar preserva loja/papel; composição do valor e três estados separados; bloco stock e responsável. Sem CRUD no cenário.
+- Gestora: resumo, catálogo, checkouts, encomendas, clientes, entregas, stock, cobranças, relatórios, equipa, definições, planos, suporte. Atendimento: resumo, encomendas, clientes, tarefas, notificações. Estafeta: resumo, entregas atribuídas, notificações. Stock: resumo, stock, catálogo. Financeiro: resumo, cobranças, relatórios. Superadmin e autenticação multi-loja em 05/07. Módulos ainda por desenhar são rótulos desactivados na revisão, não links vazios.
+- Estado vazio com próxima acção; acesso não autorizado sem dados; falha/carregamento a desenhar e testar quando houver leitura assíncrona real.
+
+## Wireframes
+[Prancha vectorial editável](wireframes-cod-02.svg): 1440, 820 e 390 px representados à escala relativa, C01, B04 e C04.a. São esboços de composição, não capturas de execução.
+Desktop: rail 240, margens 32, cabeçalho contextual; indicadores e lista. Tablet: rail compacto 84 com rótulo acessível, margens 24. Mobile: cabeçalho e menu nativo expansível, margens 16, métricas 2 colunas e detalhe 1 coluna. Ordem de leitura sem dependência de cor. Símbolo original + palavra de marca em espaços estreitos; assinatura integral apenas quando houver largura >=240.
+## 02.B · Componentes e activos
+Tokens: navegação #10263E, acção #2155D6, realce #77A7FF, canvas #F3F6FA, texto #142A40, Manrope, estados originais. Campos e botões mínimo 44px, raio 8; cards 12; badge textual 6; foco 3/2. Prever página, navegação, contexto, métricas, linha de pedido, estado e vazio. Não gerar fotos de produto inventadas nesta fundação: a fotografia é conteúdo do catálogo/checkout (03); reservar proporção e placeholder explícito, depois usar fotografia aprovada ou fixture claramente rotulada. Marca usa SVG existente, não redesenho. Sem gráficos decorativos sem dados.
+## 02.C–D · Implementação candidata
+Shell existente renovada em store-frame.js/foundation.css, resumo real com ligação à ficha. Área de revisão /gestao/revisao, somente desenvolvimento + ORDERX_REVIEW=1 + sessão de vendedor; sem SQLite para a fixture, sem import público ou selector de autorização. Contrato único em backend/review/model.mjs. Contexto e detalhe validam loja/papel/ref no servidor; permissão real por papel não implementada. O perfil de estafeta fica vazio porque ENC-1001 ainda não foi atribuído; financeiro e stock não têm link de ficha. Nenhum dado de cliente real, migração, alteração de publicação ou transição COD.
+## 02.E · Aceitação
+Build Node >=24; checkout_browser.py e review_foundation_browser.py; verificar convidado, URL directa, loja vazia, papel, referência, total, 390/820/1440, foco/teclado/contraste e aceite visual. Teste puro node --test tests/review_foundation.test.mjs. Não promover estado visual/funcional sem execução. Registar screenshot real após ambiente disponível. Próxima dependência ainda OX-COD-02.E.
+
+### Evidência parcial
+2/2 testes puros PASS, 15 asserções em 27/11/2026, código candidato fdfc08c9afd8c49d6e25ebd3b5c0338ec1145857, blobs confirmados. [Registo](../produto/evidencias/ox-cod-02-parcial.json). Build/browser/aceite pendentes. Wireframes representam três composições, não a matriz visual completa de todos os ecrãs por largura.

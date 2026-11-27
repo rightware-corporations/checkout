@@ -1,0 +1,39 @@
+{
+  "mission": "OX-COD-02.E",
+  "date": "2026-11-27",
+  "baseline": "bafdedccb0b983603dba6be2eb61b1c04ea443b1",
+  "environment": {
+    "node": "v22.16.0",
+    "npm": "10.9.2",
+    "chromium": "144.0.7559.96",
+    "gitRemote": "Could not resolve host: github.com",
+    "nextNpmCache": "no entries"
+  },
+  "unit": {
+    "command": "node --test tests/review_foundation.test.mjs",
+    "method": "Copied exact two files from pinned remote, verified git hash-object before running Node's native runner.",
+    "blobs": {
+      "src/backend/review/model.mjs": "086c95c51d213244633c209c1f6ce1309678be84",
+      "tests/review_foundation.test.mjs": "484080f448f3ec5082b1b306919fb4d1de6d3807"
+    },
+    "status": "PASS",
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "skipped": 0,
+    "tap": "ox-cod-02-e-node.tap"
+  },
+  "runner": {
+    "path": "tests/run_cod02_gate.py",
+    "localBlob": "c1bbdaf9d0697fd78794f4a2237342f81197cc22",
+    "pyCompile": "PASS",
+    "preflight": "BLOCKED_OR_FAILED: Node >=24 required; found v22.16.0",
+    "fullExecution": "NOT_RUN"
+  },
+  "build": "NOT_RUN",
+  "productionReviewGate": "NOT_RUN",
+  "browser": "NOT_RUN",
+  "captures": 0,
+  "visualAcceptance": "PENDING",
+  "status": "PARTIAL_BLOCKED"
+}

@@ -1,0 +1,22 @@
+import { reviewContext } from "@/backend/review/private-data";
+import { Frame } from "@/frontend/components/store-frame";
+import { Empty, Metrics, CommandHeader, FocusPanel, SectionHeading, Progress } from "@/frontend/components/foundation-parts";
+import { ReviewOrders, Distribution, FinanceSummary } from "@/frontend/components/review-orders";
+import { PriorityQueue } from "@/frontend/components/order-detail";
+import { filterOrders, reviewStates, reviewFilters, reviewQuery, reviewPriority } from "@/backend/review/model.mjs";
+import { Glyph } from "@/frontend/components/orderx-glyph";
+import { money } from "@/shared/money";
+export const dynamic="force-dynamic";
+export default async function Page({params,searchParams}){
+ const {loja,papel}=await params;const context=await reviewContext(loja,papel);const {metrics,orders,role,distribution}=context;const filters=await searchParams;const {query,state}=reviewFilters(filters);const returnQuery=reviewQuery({query,state});const priorities=reviewPriority(orders,papel);const root=`/gestao/revisao/${loja}/${papel}`;const filtered=filterOrders(orders,{query,state});
+ const detailAllowed=["gestora","atendimento"].includes(papel);
+ const pending=detailAllowed?orders.filter(o=>o.order==="Por confirmar"):[];const first=pending[0];
+ const path=first?`/gestao/revisao/${loja}/${papel}/encomendas/${first.ref}${returnQuery}`:null;
+ const items=papel==="financeiro"?[["Por receber",money(metrics.due),"Exigível não conciliado"],["Recebido",money(metrics.received),"Confirmado pelo financeiro"]]:papel==="stock"?[["Produtos com pedido",orders.length],["Unidades reservadas",orders.reduce((s,o)=>s+o.reserved,0)]]:papel==="estafeta"?[["Entregas atribuídas",orders.length]]:papel==="atendimento"?[["Pedidos atribuídos",metrics.count],["Valor encomendado",money(metrics.ordered)]]:[["Encomendado",money(metrics.ordered),"Valor bruto dos pedidos"],["Entregue",money(metrics.delivered),"Mercadoria entregue"],["Por receber",money(metrics.due),"Ainda não conciliado"],["Recebido",money(metrics.received),"Confirmado pelo financeiro"]];
+ return <Frame active="Resumo" review={context}>
+ <CommandHeader eyebrow="CENTRO DE OPERAÇÕES" title={papel==="gestora"?"Visão geral de vendas":`Área de ${role.label.toLowerCase()}`} description="Acompanha o trabalho da tua loja, do pedido ao recebimento." action={<span className="ox-date"><Glyph name="clock" size={16}/>26 Nov 2026 · cenário</span>}/>
+ <FocusPanel label="PRIORIDADE OPERACIONAL" title={first?`${pending.length} ${pending.length===1?"pedido por confirmar":"pedidos por confirmar"}`:orders.length?"Acompanha a operação":"Tudo em ordem por agora"} description={first?"Confirma os dados do pedido antes de preparar a expedição.":orders.length?"Consulta os indicadores disponíveis para este perfil.":"Não existem tarefas atribuídas nesta demonstração."} action={path&&<a href={path} className="ox-focus-action">Rever pedido <Glyph name="arrow" size={18}/></a>} meta={<><span>{detailAllowed?"Pedidos por confirmar":papel==="estafeta"?"Entregas atribuídas":"Pedidos no cenário"}</span><strong>{detailAllowed?pending.length:orders.length}</strong><small>Dados do cenário actual</small></>}/>
+ <Metrics metrics={items}/>
+ {detailAllowed?<div className="ox-review-dashboard"><PriorityQueue items={priorities}/><ReviewOrders orders={filtered} allCount={orders.length} root={root} query={query} state={state} states={reviewStates} returnQuery={returnQuery}/><div className={"ox-review-insights"+(papel==="gestora"?" with-finance":"")}><Distribution items={distribution} total={metrics.count}/>{papel==="gestora"&&<FinanceSummary metrics={metrics}/>}<section><SectionHeading title="Percurso em foco" description={first?first.ref:"Sem prioridade activa"}/>{first?<Progress stages={[["Pedido",first.order,true],["Entrega",first.delivery,false],["Cobrança",first.payment,false]]}/>:<Empty title="Sem percurso activo">O próximo pedido aparece aqui.</Empty>}</section></div></div>:papel==="financeiro"?<div className="ox-detail-grid"><FinanceSummary metrics={metrics}/><PriorityQueue items={priorities}/></div>:<div><PriorityQueue items={priorities}/><section><SectionHeading title="Trabalho do perfil" description="Resumo de leitura do contexto"/>{!orders.length?<Empty title="Nada a tratar">Sem tarefas neste cenário.</Empty>:<p>{orders.length} registos no contexto. O módulo de trabalho completo pertence à OX-COD-04.</p>}</section></div>}
+ </Frame>
+}

@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: Canonical order and scoped summary
+ok 1 - Canonical order and scoped summary
+  ---
+  duration_ms: 2.178438
+  type: 'test'
+  ...
+# Subtest: Money and stock invariants
+ok 2 - Money and stock invariants
+  ---
+  duration_ms: 1.391284
+  type: 'test'
+  ...
+# Subtest: Context and filter isolation
+ok 3 - Context and filter isolation
+  ---
+  duration_ms: 0.476868
+  type: 'test'
+  ...
+# Subtest: Return filters and priority scope
+ok 4 - Return filters and priority scope
+  ---
+  duration_ms: 0.880255
+  type: 'test'
+  ...
+# Subtest: Query truncation preserves well-formed UTF-16
+ok 5 - Query truncation preserves well-formed UTF-16
+  ---
+  duration_ms: 0.216736
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 85.365092

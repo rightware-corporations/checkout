@@ -1,0 +1,25 @@
+{
+  "mission": "OX-COD-02",
+  "date": "2026-11-27",
+  "candidateCommit": "fdfc08c9afd8c49d6e25ebd3b5c0338ec1145857",
+  "environment": "Node v22.16.0; container without GitHub DNS; copied exact two pure-module blobs locally, confirmed SHA-1 Git blob hashes match remote",
+  "command": "node --test tests/review_foundation.test.mjs",
+  "result": {
+    "tests": 2,
+    "pass": 2,
+    "fail": 0,
+    "assertions": 15
+  },
+  "blobs": {
+    "src/backend/review/model.mjs": "a33b56eb0049c8e1e78c431f79274eefc498ffbd",
+    "tests/review_foundation.test.mjs": "1bdac6f22d0d435f78a3c78e543d37ffd0a8fe95"
+  },
+  "cases": [
+    "Same reference and total in summary and detail",
+    "Empty store and scope"
+  ],
+  "scope": "pure fixture only; no app build, browser, real auth or integration verified",
+  "build": "NOT_RUN",
+  "browser": "NOT_RUN",
+  "visual": "NOT_RUN"
+}

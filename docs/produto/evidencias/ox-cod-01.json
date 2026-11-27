@@ -1,0 +1,771 @@
+{
+  "mission": "OX-COD-01",
+  "date": "2026-11-27",
+  "baseline": "e167126e2e54dd4aff20e5a02436ae987ff1a67a",
+  "unit": "centavos MT / unidades",
+  "initial": {
+    "physical": 10,
+    "reserved": 0,
+    "available": 10,
+    "due": 0,
+    "received": 0
+  },
+  "unitPrice": 99900,
+  "quantity": 2,
+  "fee": 10000,
+  "total": 209800,
+  "matrix": {
+    "previous": 40,
+    "revised": 48,
+    "decisions": {
+      "adaptar": 24,
+      "manter": 16,
+      "adicionar": 8
+    },
+    "visual": {
+      "P": 13,
+      "N": 35
+    },
+    "functional": {
+      "P": 3,
+      "N": 35,
+      "FA": 7,
+      "F": 3
+    },
+    "ids": [
+      "A01",
+      "A02",
+      "A03",
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "C01",
+      "C02",
+      "C02.a",
+      "C02.b",
+      "C02.c",
+      "C03",
+      "C03.a",
+      "C03.b",
+      "C03.c",
+      "C04",
+      "C04.a",
+      "C05",
+      "C05.a",
+      "C06",
+      "C07",
+      "C07.a",
+      "C08",
+      "C09",
+      "C10",
+      "C11",
+      "C11.a",
+      "C12",
+      "C13",
+      "C13.a",
+      "C13.b",
+      "C14",
+      "C15",
+      "C15.a",
+      "C16",
+      "D01",
+      "D02",
+      "D03",
+      "D04",
+      "E01",
+      "E02",
+      "E03",
+      "E04",
+      "E05",
+      "E06"
+    ]
+  },
+  "verification": {
+    "status": "PASS",
+    "assertions": 199,
+    "transitions": 21,
+    "method": "Integer deltas; expected balances; conservation due+received+voided=ordered; replay same keys; single physical reduction",
+    "application": "NOT_RUN",
+    "scope": "fixture only, not backend/concurrency"
+  },
+  "scenarios": [
+    {
+      "id": "J1",
+      "title": "Entrega cobrada e conciliada",
+      "states": [
+        {
+          "step": "00",
+          "actor": "Gestora",
+          "screen": "C02.b/C02.a",
+          "event": "Ficha e saldo inicial",
+          "order": "—",
+          "shipping": "—",
+          "payment": "—",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 0,
+          "available": 10,
+          "due": 0,
+          "received": 0,
+          "ordered": 0,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "01",
+          "actor": "Gestora",
+          "screen": "C03.a/C03.c",
+          "event": "Publicar oferta; prévia sem pedido",
+          "order": "—",
+          "shipping": "—",
+          "payment": "—",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 0,
+          "available": 10,
+          "due": 0,
+          "received": 0,
+          "ordered": 0,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "02",
+          "actor": "Comprador",
+          "screen": "D01/D02 → C04/C14",
+          "event": "Submeter; fixar valores e reservar",
+          "order": "Por confirmar",
+          "shipping": "Não iniciada",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            2,
+            209800,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "03",
+          "actor": "Atendimento",
+          "screen": "C04.a/C06",
+          "event": "Confirmar contacto/pedido",
+          "order": "Confirmado",
+          "shipping": "Por preparar",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "04",
+          "actor": "Gestora",
+          "screen": "C07/C07.a",
+          "event": "Atribuir e expedir; sem baixa",
+          "order": "Em expedição",
+          "shipping": "Em curso",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "05",
+          "actor": "Estafeta",
+          "screen": "C07.a/C13.a/C14",
+          "event": "Entregar; declarar numerário; baixa e consumo reserva",
+          "order": "Entregue",
+          "shipping": "Entregue",
+          "payment": "Declarado/por conciliar",
+          "delta": [
+            -2,
+            -2,
+            0,
+            0
+          ],
+          "physical": 8,
+          "reserved": 0,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 209800,
+          "declared": 209800,
+          "voided": 0
+        },
+        {
+          "step": "06",
+          "actor": "Financeiro",
+          "screen": "C08/C10/C12",
+          "event": "Conferir e confirmar recebimento",
+          "order": "Entregue",
+          "shipping": "Entregue",
+          "payment": "Conciliado",
+          "delta": [
+            0,
+            0,
+            -209800,
+            209800
+          ],
+          "physical": 8,
+          "reserved": 0,
+          "available": 8,
+          "due": 0,
+          "received": 209800,
+          "ordered": 209800,
+          "delivered": 209800,
+          "declared": 0,
+          "voided": 0
+        }
+      ],
+      "expected": [
+        [
+          10,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          8,
+          0,
+          8,
+          209800,
+          0
+        ],
+        [
+          8,
+          0,
+          8,
+          0,
+          209800
+        ]
+      ]
+    },
+    {
+      "id": "J2",
+      "title": "Falha e nova tentativa concluída",
+      "states": [
+        {
+          "step": "00",
+          "actor": "Gestora",
+          "screen": "C02.b/C02.a",
+          "event": "Ficha e saldo inicial",
+          "order": "—",
+          "shipping": "—",
+          "payment": "—",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 0,
+          "available": 10,
+          "due": 0,
+          "received": 0,
+          "ordered": 0,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "01",
+          "actor": "Gestora",
+          "screen": "C03.a/C03.c",
+          "event": "Publicar oferta; prévia sem pedido",
+          "order": "—",
+          "shipping": "—",
+          "payment": "—",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 0,
+          "available": 10,
+          "due": 0,
+          "received": 0,
+          "ordered": 0,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "02",
+          "actor": "Comprador",
+          "screen": "D01/D02 → C04/C14",
+          "event": "Submeter; fixar valores e reservar",
+          "order": "Por confirmar",
+          "shipping": "Não iniciada",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            2,
+            209800,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "03",
+          "actor": "Atendimento",
+          "screen": "C04.a/C06",
+          "event": "Confirmar contacto/pedido",
+          "order": "Confirmado",
+          "shipping": "Por preparar",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "04",
+          "actor": "Gestora",
+          "screen": "C07/C07.a",
+          "event": "Atribuir e expedir; sem baixa",
+          "order": "Em expedição",
+          "shipping": "Em curso",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "05",
+          "actor": "Estafeta",
+          "screen": "C07.a/C06/C14",
+          "event": "Tentativa 1 falha; retorno à guarda loja; manter reserva",
+          "order": "Em expedição",
+          "shipping": "Tentativa falhada",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "06",
+          "actor": "Gestora/estafeta",
+          "screen": "C07/C07.a/C06",
+          "event": "Reagendar e iniciar tentativa 2; mesmo pedido",
+          "order": "Em expedição",
+          "shipping": "Em curso",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "07",
+          "actor": "Estafeta",
+          "screen": "C07.a/C13.a/C14",
+          "event": "Entregar; declarar numerário; baixa e consumo reserva",
+          "order": "Entregue",
+          "shipping": "Entregue",
+          "payment": "Declarado/por conciliar",
+          "delta": [
+            -2,
+            -2,
+            0,
+            0
+          ],
+          "physical": 8,
+          "reserved": 0,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 209800,
+          "declared": 209800,
+          "voided": 0
+        },
+        {
+          "step": "08",
+          "actor": "Financeiro",
+          "screen": "C08/C10/C12",
+          "event": "Conferir e confirmar recebimento",
+          "order": "Entregue",
+          "shipping": "Entregue",
+          "payment": "Conciliado",
+          "delta": [
+            0,
+            0,
+            -209800,
+            209800
+          ],
+          "physical": 8,
+          "reserved": 0,
+          "available": 8,
+          "due": 0,
+          "received": 209800,
+          "ordered": 209800,
+          "delivered": 209800,
+          "declared": 0,
+          "voided": 0
+        }
+      ],
+      "expected": [
+        [
+          10,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          8,
+          0,
+          8,
+          209800,
+          0
+        ],
+        [
+          8,
+          0,
+          8,
+          0,
+          209800
+        ]
+      ]
+    },
+    {
+      "id": "J3",
+      "title": "Cancelamento antes da expedição",
+      "states": [
+        {
+          "step": "00",
+          "actor": "Gestora",
+          "screen": "C02.b/C02.a",
+          "event": "Ficha e saldo inicial",
+          "order": "—",
+          "shipping": "—",
+          "payment": "—",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 0,
+          "available": 10,
+          "due": 0,
+          "received": 0,
+          "ordered": 0,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "01",
+          "actor": "Gestora",
+          "screen": "C03.a/C03.c",
+          "event": "Publicar oferta; prévia sem pedido",
+          "order": "—",
+          "shipping": "—",
+          "payment": "—",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 0,
+          "available": 10,
+          "due": 0,
+          "received": 0,
+          "ordered": 0,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "02",
+          "actor": "Comprador",
+          "screen": "D01/D02 → C04/C14",
+          "event": "Submeter; fixar valores e reservar",
+          "order": "Por confirmar",
+          "shipping": "Não iniciada",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            2,
+            209800,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "03",
+          "actor": "Atendimento",
+          "screen": "C04.a/C06",
+          "event": "Confirmar contacto/pedido",
+          "order": "Confirmado",
+          "shipping": "Por preparar",
+          "payment": "Por receber",
+          "delta": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "physical": 10,
+          "reserved": 2,
+          "available": 8,
+          "due": 209800,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 0
+        },
+        {
+          "step": "04",
+          "actor": "Atendimento autorizado",
+          "screen": "C04.a/C13.a/C14",
+          "event": "Cancelar com motivo antes da expedição; libertar reserva/anular exigível",
+          "order": "Cancelado",
+          "shipping": "Cancelada antes da saída",
+          "payment": "Anulado",
+          "delta": [
+            0,
+            -2,
+            -209800,
+            0
+          ],
+          "physical": 10,
+          "reserved": 0,
+          "available": 10,
+          "due": 0,
+          "received": 0,
+          "ordered": 209800,
+          "delivered": 0,
+          "declared": 0,
+          "voided": 209800
+        }
+      ],
+      "expected": [
+        [
+          10,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          10,
+          2,
+          8,
+          209800,
+          0
+        ],
+        [
+          10,
+          0,
+          10,
+          0,
+          0
+        ]
+      ]
+    }
+  ]
+}

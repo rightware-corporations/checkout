@@ -1,0 +1,37 @@
+{
+  "mission": "OX-COD-02",
+  "revision": "V03",
+  "date": "2026-11-27",
+  "candidate": "65d5946167ba52ef4392745a65fec1f6e0a4b8c6",
+  "modelBlob": "e198c8db388912a94f4e15dd4f62ca999c058e02",
+  "method": "Remote model.mjs read at pinned commit; executed in isolated JavaScript environment after removing ESM export keywords; 55 explicit assertions. Not node --test, Next build or browser.",
+  "assertions": 55,
+  "status": "PASS",
+  "units": "centavos MT",
+  "metrics": {
+    "count": 6,
+    "ordered": 907800,
+    "delivered": 235000,
+    "due": 703800,
+    "received": 75000,
+    "voided": 129000,
+    "declared": 160000
+  },
+  "distribution": [
+    1,
+    1,
+    1,
+    2,
+    1
+  ],
+  "cases": [
+    "canonical order and detail",
+    "each order total, conservation, stock and declared/received bounds",
+    "scope for roles and stores",
+    "text/state filter and empty result"
+  ],
+  "nodeTest": "NOT_RUN",
+  "build": "NOT_RUN",
+  "browser": "NOT_RUN",
+  "visual": "PENDING"
+}
