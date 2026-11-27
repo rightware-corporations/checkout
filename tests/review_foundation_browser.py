@@ -19,6 +19,7 @@ with sync_playwright() as p:
         seller.goto(base+"/gestao")
         seller.get_by_label("Palavra-passe").fill(os.environ["SELLER_PASSWORD"])
         seller.get_by_role("button",name="Entrar",exact=True).click()
+        expect(seller.get_by_role("heading", name="Visão geral de vendas", exact=True)).to_be_visible()
         seller.goto(base+path)
         expect(seller.get_by_role("link",name="ENC-1001",exact=True)).to_be_visible()
         assert "2098,00MT" in seller.locator("main").inner_text().replace(" ","").replace("\xa0","").replace("\u202f","")
