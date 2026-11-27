@@ -8,3 +8,6 @@ C01: foco prioritário depende do estado do pedido; link abre referência existe
 Alterações na shell, CSS, biblioteca Glyph, componentes, resumo real, resumo/ficha de revisão. Mantém a rota privada e sessão, sem modificar modelo, SQLite, checkout público, regras comerciais ou fonte de dados. O resumo operacional mostra apenas o que a base actual suporta. No cenário sintético, prioridade e percurso provêm dos dados existentes. Nenhum gráfico inventado.
 ## Aceitação
 V02 candidata: build/browser/CI NOT_RUN nesta passagem. Node local v22.16.0; git ls-remote falha por DNS. O teste puro anterior não valida esta interface; não promover matriz. Verificar também navegação por teclado, context menu, acesso convidado, 390/820/1440 e regressão de checkout; capturar aplicação real, obter aprovação RIGHTWARE. OX-COD-02 continua IN_PROGRESS; 03 bloqueada pelo gate visual/funcional.
+
+### Referência visual estática
+Capturas a 1440/820/390 entregues no chat, sem overflow horizontal no protótipo; ver [evidência](../produto/evidencias/ox-cod-02-v02-design.json). A referência não é renderização do código Next.js. Símbolo original e nome da interface substituem a assinatura integral comprimida no rail estreito. Manter estado V02 candidato.

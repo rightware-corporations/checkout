@@ -1,0 +1,36 @@
+{
+  "mission": "OX-COD-02",
+  "revision": "V02",
+  "date": "2026-11-27",
+  "candidate": "1e8f6b721fa034dc43bf9819705ef3d4e8da5aeb",
+  "method": "Static HTML design reference, separate from Next.js, rendered with local Chromium via Playwright using kit Manrope and original symbol. Not a build or app test.",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "scrollWidth": 1440,
+      "screenshot": "ORDERX_V02_Desktop.png",
+      "sha256": "20210de9a759dcd355d49a3fbf16943721b822388b365e00044a808d70b550f3"
+    },
+    {
+      "width": 820,
+      "height": 1100,
+      "scrollWidth": 820,
+      "screenshot": "ORDERX_V02_Tablet.png",
+      "sha256": "135531604ff0cf58318ac94a4ad3154adcb39749fd874a9696db1772aa3fa053"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "screenshot": "ORDERX_V02_Mobile.png",
+      "sha256": "5333c6a1270fc441c1f99859c5413f08e8d377354f54a220685cee5a80cfca7b"
+    }
+  ],
+  "staticOverflow": "PASS",
+  "images": "Delivered in chat; not stored in GitHub. Hashes identify exact files.",
+  "build": "NOT_RUN",
+  "appBrowser": "NOT_RUN",
+  "visualAcceptance": "PENDING",
+  "limitations": "Reference recreates composition separately, not exact rendered app. No actual interaction tested; desktop/mobile inspected visually. Single synthetic order, not rich populated operational dataset."
+}

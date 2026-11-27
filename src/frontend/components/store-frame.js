@@ -18,7 +18,7 @@ export function Frame({active,children,review}){
  return <div className="workspace ox-workspace">
  <a className="ox-skip" href="#ox-content">Saltar para conteúdo</a>
  <aside className="rail ox-rail">
- <a href={root} className="ox-brand" aria-label="ORDERX — resumo"><img className="ox-logo-full" src="/brand/negativo.svg" alt="ORDERX"/><img className="ox-logo-compact" src="/brand/simbolo.svg" alt=""/></a>
+ <a href={root} className="ox-brand" aria-label="ORDERX — resumo"><img className="ox-logo-compact" src="/brand/simbolo.svg" alt=""/><span className="ox-brand-name" aria-hidden="true">ORDER<span className="ox-accent">X</span></span></a>
  <div className="ox-desktop-nav"><Navigation items={items} active={active}/></div>
  <details className="ox-mobile-nav"><summary><span>Menu de navegação</span><Glyph name="chevron" size={16}/></summary><Navigation items={items} active={active}/></details>
  <div className="ox-rail-footer">{review?<a className="ox-footer-link" href="/gestao"><Glyph name="shop"/><span>Gestão operacional</span></a>:reviewEnabled()?<a className="ox-footer-link" href="/gestao/revisao"><Glyph name="home"/><span>Revisão privada</span></a>:null}<form action={logout}><button title="Sair"><Glyph name="exit"/><span>Sair</span></button></form></div>
