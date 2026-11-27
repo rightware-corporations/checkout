@@ -36,3 +36,7 @@ A indicação posterior da RIGHTWARE estabelece a UCODEfy como referência sufic
 **Protocolo de continuidade.** Por indicação expressa da RIGHTWARE, cada resposta de trabalho sobre ORDERX deve deixar no GitHub uma entrada curta, mesmo quando a passagem só altera uma decisão. Registar missão, decisão ou resultado, evidência/commit de referência, validação executada ou NOT_RUN, pendências e próxima acção. Actualizar este handoff enquanto a missão estiver activa e ligar o seguinte quando mudar de pacote. Excluir credenciais e dados de clientes.
 
 **Saída desta passagem.** Comparado o prompt anterior com a descoberta do painel do produtor. Direcção e sequência actualizadas. Validação documental; testes da aplicação NOT_RUN porque não houve alteração executável. Próxima entrega: matriz COD reconciliada e mapa das três jornadas em OX-COD-01. O anterior denominador de 40 destinos não mede ainda o novo âmbito.
+
+## Passagem ao agente GPT · 27/11/2026
+
+Prompt de execução publicado em [docs/produto/prompt-mestre-execucao-cod.md](../produto/prompt-mestre-execucao-cod.md), commit 6d7596d. O agente GPT assume a continuidade e o Work será também utilizado em missões complexas de arquitectura, integração, migração e validação transversal. OX-COD-01 é a primeira missão executável; a entrega deste prompt não conclui essa missão. Ler estado e HEAD antes de escrever. Validada a publicação documental. Testes da aplicação NOT_RUN nesta passagem exclusivamente documental. Próxima evidência: matriz reconciliada, três jornadas COD calculadas e handoff actualizado.
