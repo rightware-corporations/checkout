@@ -1,6 +1,6 @@
 # ORDERX · Handoff 12 — OX-COD-02
 27/11/2026 · Responsável: agente GPT de continuidade RIGHTWARE, sem sobreposição com outros agentes.
-Estado: IN_PROGRESS (02.E pendente). 01 concluída no âmbito documental e de cálculo de fixture. Baseline de entrada 01: `e167126e2e54dd4aff20e5a02436ae987ff1a67a`; confirmar HEAD remoto antes de editar. [Handoff anterior](11-descoberta-cod.md) · [Matriz](../produto/cobertura.md) · [Jornadas](../produto/jornadas-cod.md) · [Evidência](../produto/evidencias/ox-cod-01.json).
+Estado actual: CLOSED/ACCEPTED (27/11/2026). Sucessor activo: [Handoff 13](13-percurso-comercial-cod.md). Estado histórico de entrada: IN_PROGRESS. 01 concluída no âmbito documental e de cálculo de fixture. Baseline de entrada 01: `e167126e2e54dd4aff20e5a02436ae987ff1a67a`; confirmar HEAD remoto antes de editar. [Handoff anterior](11-descoberta-cod.md) · [Matriz](../produto/cobertura.md) · [Jornadas](../produto/jornadas-cod.md) · [Evidência](../produto/evidencias/ox-cod-01.json).
 ## Próxima missão
 Shell privada na aplicação real, contexto loja, navegação por papel, componentes de estado e fonte sintética única isolada Amora/Casa Nala. C01/B04 como contratos; selector de papel não é autorização. Preservar sessão vendedor, links, dados. Não introduzir persistência multi-loja agora. Abrir a mesma referência em resumo e ficha e impedir leitura pública dos dados privados. Distinguir fixture de integração real; testar build, checkout existente, fronteira convidado/privado. Registar resultado por ID, data e commit; visual/funcional separados. Sem automatizar regras críticas, cobrar ou utilizar dados reais. 03 depende de 02. Actualizar este handoff a cada passagem.
 
@@ -69,3 +69,6 @@ ZIP nativo ORDERX-COD-02-E-R1.zip com nove PNG, logs, manifesto e r1-checks.json
 
 ## Parecer independente R1 · 27/11/2026
 HEAD de entrada 334cbce319ae600ca0540452351a48216f2c8802. Recuperados ambos ZIP, CRC OK, 19/19 + 20/20 hashes, nove pares de PNG comparados, logs e r1-checks.json inspeccionados. [Parecer de aceitação](../design/parecer-aceitacao-cod-02-e-r1.md). Os seis achados estão resolvidos no âmbito testado. Recomendação VISUAL_ACCEPTANCE_RECOMMENDED; não requer R2 pelos achados avaliados. Não é aprovação formal da RIGHTWARE, nem novo gate executado. Sem mudança de código ou promoção da matriz. OX-COD-03 permanece NOT_STARTED até decisão explícita do operador.
+
+## Aceitação oficial e encerramento · 27/11/2026
+DECISÃO EXPLÍCITA RIGHTWARE: aprovada definitivamente fundação Commerce Command V02–V04 e R1. [Decisão](../design/aceitacao-fundacao-cod-02.md). OX-COD-02 CLOSED/ACCEPTED; baseline visual f93cab2. 3 VA* de fundação (não integral de todos destinos). Sem nova execução técnica nem alteração código nesta passagem. OX-COD-03 IN_PROGRESS, 03.A reconciliação/planeamento concluídos. **Handoff activo passa a [13-percurso-comercial-cod.md](13-percurso-comercial-cod.md)**; próximo 03.B. Não reabrir 02 sem defeito comprovado.

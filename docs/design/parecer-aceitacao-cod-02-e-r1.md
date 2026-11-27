@@ -19,3 +19,6 @@ Recuperados ambos ZIP da biblioteca. SHA-256 original 8c3f46ca63f2dfe76c6ff3d645
 Dashboard móvel ainda longo com seis pedidos; gestão futura de listas grandes, paginação e densidade devem ser tratadas nos módulos funcionais pertinentes, não nesta fundação. Tablet apresenta maior altura em C01/B04, mas distribuição mais legível. Nenhuma autorização real multi-loja, operação de stock ou conciliação criada pela revisão; são contextos de leitura simulados. Não confundir aceite visual de três vistas com aceite dos 48 ecrãs ou prontidão comercial.
 ## Recomendação e fronteira
 VISUAL_ACCEPTANCE_RECOMMENDED — sem nova R2 necessária pelos achados avaliados. TECHNICAL_PASS de f93cab2 preservado. Aceitação formal depende de decisão explícita da RIGHTWARE. Até essa decisão, OX-COD-02 permanece pendente de aceite e OX-COD-03 NOT_STARTED. Não promover matriz nem iniciar fase 03 nesta passagem. Após aprovação, congelar esta fundação e proceder à reconciliação de cobertura e contrato de OX-COD-03 (catálogo→checkout→encomenda→atendimento), preservando as hipóteses COD e a operação existente.
+
+## Decisão subsequente
+Aceitação formal concedida em 27/11/2026: [decisão oficial](aceitacao-fundacao-cod-02.md). OX-COD-02 encerrada; OX-COD-03 iniciada.
