@@ -11,3 +11,6 @@ V02 candidata: build/browser/CI NOT_RUN nesta passagem. Node local v22.16.0; git
 
 ### Referência visual estática
 Capturas a 1440/820/390 entregues no chat, sem overflow horizontal no protótipo; ver [evidência](../produto/evidencias/ox-cod-02-v02-design.json). A referência não é renderização do código Next.js. Símbolo original e nome da interface substituem a assinatura integral comprimida no rail estreito. Manter estado V02 candidato.
+
+## Revisão do operador
+27/11/2026: direcção estética considerada em bom caminho; continuar V03. Não é aceitação visual integral nem validação da aplicação.
