@@ -4,6 +4,7 @@ import { db } from "../persistence/sqlite";
 import { field } from "../forms/field";
 import { requireSeller } from "../identity/require-seller";
 import { randomBytes } from "node:crypto";
+import { publishLegacyLink } from "../catalog/repository.mjs";
 function cents(value) {
   if (!/^\d{1,7}([.,]\d{1,2})?$/.test(value)) return NaN;
   return Math.round(Number(value.replace(",", ".")) * 100);
@@ -30,8 +31,6 @@ export async function publish(form) {
   )
     redirect("/gestao/publicar?erro=produto");
   const slug = randomBytes(9).toString("hex");
-  db()
-    .prepare("INSERT INTO links VALUES (?,?,?,?,?,?,?)")
-    .run(slug, title, price, delivery, max, image, form.has("bairro") ? 1 : 0);
+  publishLegacyLink(db(), {slug,title,price,delivery,max,image,bairro:form.has("bairro") ? 1 : 0});
   redirect("/gestao/checkouts");
 }

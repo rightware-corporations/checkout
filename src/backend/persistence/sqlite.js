@@ -2,6 +2,7 @@ import "server-only";
 import { DatabaseSync } from "node:sqlite";
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
+import { ensureCatalog } from "../catalog/repository.mjs";
 let database;
 export function db() {
   if (database) return database;
@@ -25,6 +26,7 @@ export function db() {
     );
     CREATE TABLE IF NOT EXISTS sessions (digest TEXT PRIMARY KEY, expires INTEGER NOT NULL);
   `);
+  try { ensureCatalog(conn); } catch (error) { conn.close(); throw error; }
   database = conn;
   return conn;
 }

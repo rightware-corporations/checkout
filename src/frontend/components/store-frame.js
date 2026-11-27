@@ -3,7 +3,7 @@ import { reviewEnabled } from "@/backend/review/access";
 import { Glyph } from "./orderx-glyph";
 import "./foundation.css";
 
-const pages=[["Resumo","/gestao","home"],["Publicar produto","/gestao/publicar","plus"],["Meus checkouts","/gestao/checkouts","link"],["Encomendas","/gestao/encomendas","orders"],["Clientes","/gestao/clientes","people"]];
+const pages=[["Resumo","/gestao","home"],["Catálogo","/gestao/produtos","box"],["Publicar produto","/gestao/publicar","plus"],["Meus checkouts","/gestao/checkouts","link"],["Encomendas","/gestao/encomendas","orders"],["Clientes","/gestao/clientes","people"]];
 const catalog={
  Resumo:["home","Visão geral"],Catálogo:["box","Comércio"],"Publicar produto":["plus","Comércio"],Checkouts:["link","Comércio"],"Meus checkouts":["link","Comércio"],Encomendas:["orders","Comércio"],Clientes:["people","Comércio"],Entregas:["truck","Operação"],Stock:["box","Operação"],Tarefas:["task","Operação"],Notificações:["bell","Operação"],Cobranças:["wallet","Operação"],Relatórios:["chart","Operação"],Equipa:["people","Administração"],Definições:["settings","Administração"],Planos:["wallet","Administração"],Suporte:["help","Administração"]
 };
