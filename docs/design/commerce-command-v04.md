@@ -5,3 +5,5 @@
 - Retorno à lista com pesquisa/estado normalizados e codificados. Não aceitar URL de retorno externa. Corrigir cores da distribuição quando há estados sem ocorrências.
 - Teste de navegador preparado para 9 capturas reais C01/B04/C04.a em 390/820/1440 e regresso filtrado. Mantém regressões existentes.
 14 verificações PASS sobre módulo candidato em JavaScript isolado; não runner Node. Ambiente local Node 22 e GitHub DNS indisponível. Build/browser/CI/aceitação NOT_RUN. OX-COD-02.E aberta, 03 não iniciada. Sem alteração da aplicação comercial real, dados ou regras COD. Não iniciar serviços pagos.
+
+Releitura: 68 verificações PASS, inclui Unicode; [gate](gate-cod-02-e.md). Não é build ou browser.

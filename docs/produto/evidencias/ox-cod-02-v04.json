@@ -47,5 +47,11 @@
   "build": "NOT_RUN",
   "nodeTest": "NOT_RUN",
   "browser": "NOT_RUN",
-  "visualAcceptance": "PENDING"
+  "visualAcceptance": "PENDING",
+  "readback": {
+    "baseline": "a8a105aa8c3c0f0a66de62604edc1cd164f2fbbf",
+    "assertions": 68,
+    "status": "PASS",
+    "method": "Re-executed V03 invariants plus V04 URL/filter/priority checks on readback model with explicit UTF-16 correction; not Node runner."
+  }
 }

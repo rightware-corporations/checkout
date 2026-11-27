@@ -42,7 +42,7 @@ export function getReviewOrder(storeId, roleId, ref) {
 export const reviewStores=stores.map(({id,name})=>({id,name}));
 
 export function reviewFilters(params={}) {
- return {query:typeof params.q==="string"?params.q.trim().slice(0,120):"",state:typeof params.estado==="string"&&reviewStates.includes(params.estado)?params.estado:""};
+ return {query:typeof params.q==="string"?params.q.trim().slice(0,120).toWellFormed():"",state:typeof params.estado==="string"&&reviewStates.includes(params.estado)?params.estado:""};
 }
 export function reviewQuery({query="",state=""}={}) {
  const f=reviewFilters({q:query,estado:state});
