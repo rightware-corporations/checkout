@@ -1,0 +1,45 @@
+{
+  "mission": "OX-COD-03.B gate review",
+  "date": "2026-11-27",
+  "baseline": "bb2bb4ed80580816c6250515ee303e29e3e52179",
+  "node": "v22.16.0",
+  "command": "node --test tests/*.mjs (isolated directory with five exact remote files)",
+  "files": [
+    {
+      "path": "src/backend/catalog/repository.mjs",
+      "sha": "ba9e098b860fd7f55de47c4d55e342cbbc536f74"
+    },
+    {
+      "path": "tests/catalog.test.mjs",
+      "sha": "4b1e17ac2a5b32163ad724731c638c23af2c8b85"
+    },
+    {
+      "path": "tests/catalog_migration_file.test.mjs",
+      "sha": "2d45344dcaca37e6e238a3ae1028757428ddae40"
+    },
+    {
+      "path": "src/backend/review/model.mjs",
+      "sha": "086c95c51d213244633c209c1f6ce1309678be84"
+    },
+    {
+      "path": "tests/review_foundation.test.mjs",
+      "sha": "484080f448f3ec5082b1b306919fb4d1de6d3807"
+    }
+  ],
+  "tests": {
+    "pass": 11,
+    "fail": 0,
+    "skip": 0
+  },
+  "gate": {
+    "file": "tests/run_cod02_gate.py",
+    "candidateBlob": "a1d7ed3088d2b3ec07ac56e4eb1730ae704006d4",
+    "pyCompile": "PASS",
+    "defaultPreflight": "BLOCKED Node >=24 required",
+    "catalogPreflight": "BLOCKED Node >=24 required"
+  },
+  "build": "NOT_RUN",
+  "browser": "NOT_RUN",
+  "newScreenshots": 0,
+  "visualAcceptance": "PENDING"
+}

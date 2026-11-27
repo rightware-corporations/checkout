@@ -1,4 +1,5 @@
 """Run OX-COD-02.E in a clean, disposable checkout; no deployment or paid CI."""
+import argparse
 import hashlib
 import json
 import os
@@ -17,13 +18,19 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 os.chdir(ROOT)
-OUT = Path(tempfile.mkdtemp(prefix="orderx-cod02-evidence-"))
+parser = argparse.ArgumentParser(description="ORDERX reproducible technical gate")
+parser.add_argument("--catalog", action="store_true", help="Include OX-COD-03.B catalog regressions and captures")
+CATALOG = parser.parse_args().catalog
+OUT = Path(tempfile.mkdtemp(prefix="orderx-cod03b-evidence-" if CATALOG else "orderx-cod02-evidence-"))
 SECRET = secrets.token_hex(24)
 ENV = dict(os.environ, SELLER_PASSWORD=SECRET, ORDERX_REVIEW="1",
            ORDERX_EVIDENCE_DIR=str(OUT / "screens"), NEXT_TELEMETRY_DISABLED="1")
 ENV.pop("NODE_ENV", None)
 ENV.pop("ORDERX_MAQUETA", None)
-RESULT = {"status": "IN_PROGRESS", "steps": {}, "head": None}
+ENV.pop("ORDERX_CATALOG_EVIDENCE_DIR", None)
+if CATALOG:
+    ENV["ORDERX_CATALOG_EVIDENCE_DIR"] = str(OUT / "catalog-screens")
+RESULT = {"status": "IN_PROGRESS", "steps": {}, "head": None, "scope": "OX-COD-03.B" if CATALOG else "OX-COD-02.E"}
 
 
 def command(args, name, timeout=600):
@@ -109,6 +116,14 @@ def dev_check(base):
     if actual != expected:
         raise RuntimeError("Expected nine screenshots; got " + str(sorted(actual)))
     RESULT["steps"]["screenshots"] = {"count": len(actual), "status": "CAPTURED_NOT_REVIEWED"}
+    if CATALOG:
+        command([sys.executable, "tests/catalog_browser.py"], "catalog_browser")
+        expected_catalog = {f"{screen}-{width}.png" for screen in ("C02", "C02a", "C02b", "C02c")
+                            for width in (390, 820, 1440)}
+        actual_catalog = {p.name for p in (OUT / "catalog-screens").glob("*.png")}
+        if actual_catalog != expected_catalog:
+            raise RuntimeError("Expected twelve catalog screenshots; got " + str(sorted(actual_catalog)))
+        RESULT["steps"]["catalog-screenshots"] = {"count": len(actual_catalog), "status": "CAPTURED_NOT_REVIEWED"}
 
 
 try:
@@ -129,7 +144,10 @@ try:
         ENV["CHECKOUT_DB"] = str(Path(temporary) / "build.sqlite")
         command([sys.executable, "-c", "import playwright.sync_api"], "playwright-preflight")
         command([npm, "ci"], "npm-ci")
-        command([NODE, "--test", "tests/review_foundation.test.mjs"], "unit-tests")
+        unit_files = ["tests/review_foundation.test.mjs"]
+        if CATALOG:
+            unit_files.extend(["tests/catalog.test.mjs", "tests/catalog_migration_file.test.mjs"])
+        command([NODE, "--test", *unit_files], "unit-tests")
         command([npm, "run", "build"], "build")
         run_server("start", Path(temporary) / "production.sqlite", production_check)
         run_server("dev", Path(temporary) / "development.sqlite", dev_check)

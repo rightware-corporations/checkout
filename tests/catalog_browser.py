@@ -1,4 +1,4 @@
-# Run against an isolated dev server with an empty disposable CHECKOUT_DB.
+# Run against an isolated dev server with disposable CHECKOUT_DB. May follow checkout regression.
 import os
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
@@ -7,7 +7,8 @@ evidence=os.environ.get("ORDERX_CATALOG_EVIDENCE_DIR")
 if evidence: Path(evidence).mkdir(parents=True,exist_ok=True)
 def capture(page,screen,w):
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-    if evidence: page.screenshot(path=str(Path(evidence)/f"{screen}-{w}.png"),full_page=True)
+    page.evaluate("document.fonts.ready")
+    if evidence: page.screenshot(path=str(Path(evidence)/f"{screen}-{w}.png"),full_page=True,animations="disabled")
 with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=os.environ.get("CHROMIUM_PATH"),args=["--no-sandbox"])
     guest=browser.new_page()
@@ -27,12 +28,18 @@ with sync_playwright() as p:
         page.get_by_label("Descrição (opcional)").fill("Fixture de validação")
         page.get_by_label("Preço base (MT)").fill("0")
         page.get_by_role("button",name="Guardar produto").click()
-        expect(page.get_by_role("alert")).to_contain_text("preço positivo")
+        expect(page.locator("#error-price")).to_contain_text("preço positivo")
         expect(page.get_by_label("Nome do produto")).to_have_value(name)
         page.get_by_label("Preço base (MT)").fill("999,00")
         page.get_by_role("button",name="Guardar produto").click()
         expect(page.get_by_role("heading",name=name,exact=True)).to_be_visible()
         detail=page.url
+        guest=browser.new_page()
+        for url in (base+"/gestao/produtos",base+"/gestao/produtos/novo",detail,detail+"/editar"):
+            guest.goto(url)
+            expect(guest.get_by_label("Palavra-passe")).to_be_visible()
+            expect(guest.get_by_text(name,exact=True)).to_have_count(0)
+        guest.close()
         capture(page,"C02a",w)
         page.get_by_role("link",name="Editar produto").click()
         capture(page,"C02c",w)
@@ -40,10 +47,12 @@ with sync_playwright() as p:
         page.get_by_role("button",name="Guardar produto").click()
         expect(page).to_have_url(detail)
         page.reload()
-        expect(page.locator(".ox-product-price")).to_contain_text("200")
+        assert "".join(page.locator(".ox-product-price").inner_text().split())=="1200,00MT"
         page.get_by_text("Arquivar produto",exact=True).click()
         page.get_by_role("button",name="Confirmar arquivo").click()
         expect(page.locator(".ox-product-detail").get_by_text("Arquivado",exact=True)).to_be_visible()
+        page.goto(detail+"/editar")
+        expect(page).to_have_url(detail)
         page.get_by_text("Reactivar produto",exact=True).click()
         page.get_by_role("button",name="Confirmar reactivação").click()
         expect(page.locator(".ox-product-detail").get_by_text("Activo",exact=True)).to_be_visible()
@@ -56,5 +65,36 @@ with sync_playwright() as p:
         page.get_by_role("button",name="Filtrar").click()
         expect(page.get_by_text("Sem resultados",exact=True)).to_be_visible()
         page.close()
+    # Independent legacy publication fixture; editing its catalog record must not change the link.
+    page=browser.new_page()
+    page.goto(base+"/gestao")
+    page.get_by_label("Palavra-passe").fill(os.environ["SELLER_PASSWORD"])
+    page.get_by_role("button",name="Entrar",exact=True).click()
+    expect(page.get_by_role("heading",name="Visão geral de vendas",exact=True)).to_be_visible()
+    page.goto(base+"/gestao/publicar")
+    legacy_name="Produto legado QA 03B"
+    page.get_by_label("Nome do produto").fill(legacy_name)
+    page.get_by_label("Preço por unidade (MT)").fill("999")
+    page.get_by_label("Entrega fixa (MT)").fill("100")
+    page.get_by_role("button",name="Publicar link").click()
+    expect(page).to_have_url(base+"/gestao/checkouts")
+    page.goto(base+"/gestao/produtos")
+    page.get_by_label("Pesquisar").fill(legacy_name)
+    page.get_by_role("button",name="Filtrar").click()
+    page.get_by_role("link",name=legacy_name,exact=True).click()
+    expect(page.get_by_text("Arquivo indisponível",exact=False)).to_be_visible()
+    public_path=page.get_by_role("link",name="Abrir checkout").get_attribute("href")
+    page.get_by_role("link",name="Editar produto").click()
+    page.get_by_label("Nome do produto").fill("Ficha actualizada QA 03B")
+    page.get_by_label("Preço base (MT)").fill("1200")
+    page.get_by_role("button",name="Guardar produto").click()
+    expect(page.get_by_role("heading",name="Ficha actualizada QA 03B",exact=True)).to_be_visible()
+    public=browser.new_page()
+    public.goto(base+public_path)
+    expect(public.get_by_role("heading",name=legacy_name,exact=True)).to_be_visible()
+    public.get_by_label("Quantidade").select_option("2")
+    assert "".join(public.locator("strong[aria-live]").inner_text().split())=="Total2098,00MT"
+    public.close()
+    page.close()
     browser.close()
 print("PASS: catálogo, persistência, validação, arquivo/reactivação, pesquisa e sessão em 390/820/1440")
